@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>避雷 · 南京建康高级技工学校</title>
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --surface: rgba(255,255,255,0.04);
+    --surface-hover: rgba(255,255,255,0.07);
+    --card: rgba(255,255,255,0.055);
+    --card-border: rgba(255,255,255,0.08);
+    --text-primary: #e8e6e3;
+    --text-secondary: #b0ada8;
+    --text-tertiary: #6e6b66;
+    --accent: #e53935;
+    --accent-dim: #c62828;
+    --accent-glow: rgba(229,57,53,0.18);
+    --accent-glass: rgba(229,57,53,0.08);
+    --tag-bg: rgba(229,57,53,0.12);
+    --tag-text: #ef9a9a;
+    --badge: #ef5350;
+    --divider: rgba(255,255,255,0.06);
+    --radius-sm: 10px;
+    --radius: 16px;
+    --radius-lg: 24px;
+    --shadow-card: 0 1px 3px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.15);
+    --shadow-elevated: 0 2px 4px rgba(0,0,0,0.35), 0 8px 32px rgba(0,0,0,0.2);
+    --font: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+    --font-mono: 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--font);
+    line-height: 1.7;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(229,57,53,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 90% 80%, rgba(229,57,53,0.04) 0%, transparent 60%);
+  }
+
+  /* ── 顶部避雷横幅 ── */
+  .warning-banner {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(135deg, #b71c1c 0%, #c62828 40%, #d32f2f 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #fff;
+    box-shadow: 0 2px 16px rgba(183,28,28,0.4);
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  .warning-banner .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255,255,255,0.22);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .warning-banner .badge svg { width: 15px; height: 15px; flex-shrink: 0; }
+  .warning-banner .sep { opacity: 0.45; font-weight: 300; display: none; }
+  .warning-banner .text { font-weight: 500; line-height: 1.4; }
+  @media (min-width: 600px) {
+    .warning-banner { padding: 12px 24px; font-size: 0.95rem; }
+    .warning-banner .sep { display: inline; margin: 0 2px; }
+  }
+
+  /* ── 主容器 ── */
+  .page {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 24px 16px 60px;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    padding: 56px 0 40px;
+    text-align: center;
+    position: relative;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: var(--accent-glass);
+    color: var(--tag-text);
+    border: 1px solid rgba(229,57,53,0.2);
+    padding: 5px 16px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: clamp(1.7rem, 5vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #ff8a80, #ef5350, #c62828);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero .subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 400;
+    max-width: 520px;
+    margin: 0 auto 28px;
+    line-height: 1.6;
+  }
+  .hero-divider {
+    width: 48px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+    margin: 0 auto 32px;
+    opacity: 0.7;
+  }
+
+  /* ── 快速事实卡 ── */
+  .facts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+  .fact-item {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 18px 16px;
+    text-align: center;
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+  .fact-item:hover {
+    background: var(--surface-hover);
+    box-shadow: var(--shadow-card);
+  }
+  .fact-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+  .fact-label {
+    font-size: 0.78rem;
+    color: var(--text-tertiary);
+    font-weight: 500;
+  }
+
+  /* ── 章节 ── */
+  .section {
+    margin-bottom: 48px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .section-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--accent-glass);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--accent);
+  }
+  .section-icon svg { width: 18px; height: 18px; }
+  .section h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  /* ── 问题卡片 ── */
+  .issue-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 22px 20px;
+    margin-bottom: 14px;
+    transition: background 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .issue-card:hover {
+    background: var(--surface-hover);
+    box-shadow: var(--shadow-card);
+  }
+  .issue-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .issue-number {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+  .issue-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+  }
+  .issue-card p {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+  .issue-card .law-ref {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.78rem;
+    color: var(--badge);
+    background: var(--accent-glass);
+    padding: 3px 10px;
+    border-radius: 14px;
+    font-weight: 500;
+  }
+
+  /* ── 证据块 ── */
+  .evidence-block {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 14px;
+    transition: background 0.2s;
+  }
+  .evidence-block:hover { background: var(--surface-hover); }
+  .evidence-block h3 {
+    font-size: 0.98rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .evidence-block h3 .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .evidence-block p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+  .evidence-block .quote {
+    margin: 12px 0;
+    padding: 14px 16px;
+    background: rgba(255,255,255,0.025);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.88rem;
+    color: var(--text-primary);
+    line-height: 1.7;
+    font-style: italic;
+  }
+  .evidence-block .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .tag-pill {
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    padding: 4px 12px;
+    border-radius: 14px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .source-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    font-size: 0.82rem;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .source-link:hover { color: var(--text-secondary); }
+  .source-link svg { width: 14px; height: 14px; }
+
+  /* ── 时间线 ── */
+  .timeline {
+    position: relative;
+    padding-left: 28px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 4px;
+    bottom: 4px;
+    width: 2px;
+    background: var(--divider);
+    border-radius: 1px;
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 18px;
+    padding-left: 8px;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -24px;
+    top: 7px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+    z-index: 1;
+  }
+  .timeline-date {
+    font-size: 0.72rem;
+    color: var(--text-tertiary);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    margin-bottom: 2px;
+  }
+  .timeline-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  /* ── 数据矛盾表格 ── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 0.88rem;
+    overflow-x: auto;
+    display: block;
+  }
+  .data-table thead { display: none; }
+  .data-table tr {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--divider);
+    padding: 12px 0;
+    gap: 4px 0;
+  }
+  .data-table tr:last-child { border-bottom: none; }
+  .data-table td {
+    flex: 1 1 100%;
+    color: var(--text-secondary);
+    padding: 2px 0;
+  }
+  .data-table td:first-child {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 0.84rem;
+  }
+  .data-table td.value-warn {
+    color: var(--badge);
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  @media (min-width: 500px) {
+    .data-table tr { flex-wrap: nowrap; }
+    .data-table td { flex: 1; padding: 4px 8px; }
+    .data-table td:first-child { flex: 0 0 180px; }
+  }
+
+  /* ── 警示块 ── */
+  .alert-box {
+    background: var(--accent-glass);
+    border: 1px solid rgba(229,57,53,0.25);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    margin: 28px 0;
+    text-align: center;
+  }
+  .alert-box .alert-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--badge);
+    margin-bottom: 8px;
+  }
+  .alert-box p {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  /* ── 页脚 ── */
+  .footer {
+    text-align: center;
+    padding: 40px 0 20px;
+    color: var(--text-tertiary);
+    font-size: 0.78rem;
+    border-top: 1px solid var(--divider);
+  }
+  .footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer a:hover { color: var(--text-primary); }
+
+  /* ── 返回顶部 ── */
+  .back-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 50;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.3s, transform 0.3s, background 0.2s;
+    box-shadow: var(--shadow-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .back-top.visible { opacity: 1; transform: translateY(0); }
+  .back-top:hover { background: var(--surface-hover); color: var(--text-primary); }
+  .back-top svg { width: 20px; height: 20px; }
+
+  /* ── 无障碍 ── */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #faf9f7;
+      --surface: rgba(0,0,0,0.025);
+      --surface-hover: rgba(0,0,0,0.045);
+      --card: rgba(0,0,0,0.03);
+      --card-border: rgba(0,0,0,0.06);
+      --text-primary: #1a1a1c;
+      --text-secondary: #555;
+      --text-tertiary: #999;
+      --divider: rgba(0,0,0,0.08);
+      --accent-glass: rgba(229,57,53,0.06);
+      --tag-bg: rgba(229,57,53,0.08);
+      --tag-text: #c62828;
+      --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+      --shadow-elevated: 0 2px 4px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.06);
+    }
+    body {
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(229,57,53,0.03) 0%, transparent 70%);
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ⚠️ 顶部避雷横幅 -->
+<div class="warning-banner">
+  <span class="badge">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 22h20L12 2z"/><line x1="12" y1="9" x2="12" y2="14"/><circle cx="12" cy="18" r="0.8" fill="currentColor"/></svg>
+    避雷
+  </span>
+  <span class="sep">·</span>
+  <span class="text">南京建康高级技工学校 — 省级重点技工院校的真实面目</span>
+</div>
+
+<!-- ── 主容器 ── -->
+<main class="page">
+
+  <!-- Hero -->
+  <section class="hero">
+    <span class="hero-tag">⚠️ 报考预警</span>
+    <h1>避雷·南京建康<br>高级技工学校</h1>
+    <p class="subtitle">表面是"江苏省重点高级技工学校"，背后是师资注水、非法扣押手机、强制消费、举报渠道形同虚设的民办野鸡技校。本文基于公开资料与亲历者陈述整理。</p>
+    <div class="hero-divider"></div>
+  </section>
+
+  <!-- 快速事实 -->
+  <div class="facts-grid">
+    <div class="fact-item">
+      <div class="fact-value">2006</div>
+      <div class="fact-label">建校年份</div>
+    </div>
+    <div class="fact-item">
+      <div class="fact-value">172亩</div>
+      <div class="fact-label">自有校区</div>
+    </div>
+    <div class="fact-item">
+      <div class="fact-value">4000+</div>
+      <div class="fact-label">在校学生</div>
+    </div>
+    <div class="fact-item">
+      <div class="fact-value" style="color:#ff8a80;">矛盾</div>
+      <div class="fact-label">教职工数（215/219/269）</div>
+    </div>
+    <div class="fact-item">
+      <div class="fact-value">15个</div>
+      <div class="fact-label">开设专业</div>
+    </div>
+  </div>
+
+  <!-- ═══════════ 第一节：七大问题 ═══════════ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <h2>七大核心问题</h2>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-number">问题一</div>
+      <h3>强制劳动打卡，侵犯隐私</h3>
+      <p>学校强制要求学生使用定位打卡 App 进行每日劳动签到，实时追踪学生地理位置——即使在周末和节假日也不例外。学生在校期间的行动轨迹被全方位监控，隐私权受到严重侵犯。</p>
+      <span class="law-ref">《未成年人保护法》第4条 · 隐私权</span>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-number">问题二</div>
+      <h3>非法扣押手机</h3>
+      <p>入学即强制收缴手机，仅限"课余固定时段"使用。学校在招生软文中将此作为"管理亮点"宣传（"入校手机统一集中保管"），实质是对学生合法财产权的长期侵犯。《民法典》第267条明确规定私人合法财产受法律保护。</p>
+      <span class="law-ref">《民法典》第267条 · 财产权</span>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-number">问题三</div>
+      <h3>打击报复举报人</h3>
+      <p>学生或家长一旦提出质疑、投诉或向上级部门反映问题，校方不是解决问题，而是对学生进行区别对待、公开批评甚至变相处分。内部举报渠道形同虚设，敢于发声的学生面临被孤立、被针对的风险。</p>
+      <span class="law-ref">《信访条例》第3条 · 禁止打击报复</span>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-number">问题四</div>
+      <h3>师资严重注水</h3>
+      <p>2021年南京市人社局专家组评估报告明确记载：<strong>15%的专任教师不具备教师资格</strong>，具备高级职称或技师资格的占比不达标准。学校官方宣传的教职工数字在不同来源中分别为215人、219人、269人——三个版本同时存在于互联网。</p>
+      <span class="law-ref">《教师法》第10条 · 教师资格制度</span>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-number">问题五</div>
+      <h3>形式主义泛滥</h3>
+      <p>大量时间被用于非教学活动：强制参加形式化的升旗仪式、表面光鲜的校企合作摆拍、与教学无关的行政检查准备。学生实际学习时间被严重压缩，真正有价值的技能培训被边缘化。</p>
+      <span class="law-ref">《职业教育法》第4条 · 教育质量</span>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-number">问题六</div>
+      <h3>办学资质存疑</h3>
+      <p>学校前身为"南京金肯技工学校"，2006年成立，2021年才升格为高级技工学校。专家组评估在师资、职称等多项指标上扣分，却依然获批升格。百度匿名评价直言其为"名为高级，实为困境"。</p>
+      <span class="law-ref">《民办教育促进法》 · 办学条件</span>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-number">问题七</div>
+      <h3>举报渠道虚设</h3>
+      <p>学校官网虽设有"监督举报公告"页面，但实际举报后无任何有效反馈和处理。对外公布的举报制度仅停留在纸面上，学生维权无门。2023年黑猫投诉平台上关于强制办卡的投诉最终因学生未进一步操作被系统自动关闭。</p>
+      <span class="law-ref">《未成年人保护法》第11条 · 强制报告</span>
+    </div>
+  </section>
+
+  <!-- ═══════════ 第二节：实锤证据 ═══════════ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+      </div>
+      <h2>实锤证据</h2>
+    </div>
+
+    <!-- 证据1：人社局评估 -->
+    <div class="evidence-block">
+      <h3><span class="dot"></span>南京市人社局专家组评估扣分（2021年）</h3>
+      <p>根据南京市人社局宁人社〔2021〕28号文件附件《专家评审分数汇总表》：</p>
+      <div class="quote">
+        "15%的专任教师不具备教师资格，扣10分"<br>
+        "具备高级职称或技师、高级技师职业资格的占比不符要求，扣10分"
+      </div>
+      <p>在师资队伍（满分140）一项中，该校自评满分，专家组实际仅给100分，扣掉40分之多——却依然在同年获批升格为"高级技工学校"。</p>
+      <div class="tag-row">
+        <span class="tag-pill">官方文件</span>
+        <span class="tag-pill">师资注水实锤</span>
+        <span class="tag-pill">扣分仍升格</span>
+      </div>
+      <a class="source-link" href="https://jshrss.jiangsu.gov.cn/module/download/downfile.jsp?classid=0&filename=64b7ada5410b46869ca08f999e5b6d8e.pdf" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        江苏省人社厅原始文件 (PDF)
+      </a>
+    </div>
+
+    <!-- 证据2：黑猫投诉 -->
+    <div class="evidence-block">
+      <h3><span class="dot"></span>黑猫投诉：强制办理校园手机卡（2023年）</h3>
+      <p>走读学生被老师打电话催促办理联通校园卡，"不然过不了门禁"。办完后发现绑都没绑照样能过门禁。业务员仅说"扫码交100元"，套餐详情未告知。实际扣费49.9元/月，还被擅自加开宽带业务——走读生根本没有安装地点。</p>
+      <div class="tag-row">
+        <span class="tag-pill">强制消费</span>
+        <span class="tag-pill">欺诈扣费</span>
+        <span class="tag-pill">投诉自动关闭</span>
+      </div>
+      <a class="source-link" href="https://hlj.tousu.sina.com.cn/complaint/view/17365720113" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        黑猫投诉原始页面
+      </a>
+    </div>
+
+    <!-- 证据3：数据矛盾 -->
+    <div class="evidence-block">
+      <h3><span class="dot"></span>教职工数字三版本矛盾</h3>
+      <p>同一个学校，三个不同的官方/半官方来源给出了三个不同的教职工数字：</p>
+      <table class="data-table">
+        <tr><td>学校官方简介（jkxdu.cn）</td><td class="value-warn">269人</td><td>截至2025年3月</td></tr>
+        <tr><td>百度百科</td><td class="value-warn">219人</td><td>最后更新2024年</td></tr>
+        <tr><td>第三方招生网站（axjx.com等）</td><td class="value-warn">215人</td><td>早年数据</td></tr>
+      </table>
+      <p>这种数据混乱要么是管理粗放到连教职工人数都搞不清，要么就是人为注水夸大——三个数字中至少有两个是假的。</p>
+      <div class="tag-row">
+        <span class="tag-pill">数据造假</span>
+        <span class="tag-pill">管理混乱</span>
+        <span class="tag-pill">虚假宣传</span>
+      </div>
+    </div>
+
+    <!-- 证据4：食堂强制消费 -->
+    <div class="evidence-block">
+      <h3><span class="dot"></span>食堂强制消费</h3>
+      <p>第三方教育资讯网站（offcn.cc）引用学生反馈披露：</p>
+      <div class="quote">
+        "有同学吐槽说学校居然'强制干饭'……有的老师甚至要求'就算不吃，卡也得刷钱'。早上吃的居然有辣的，好多同学吃完肠胃直接'起义'。"
+      </div>
+      <p>食堂官方宣传为"自营食堂、食品安全"，但实际运营中强制学生在食堂刷卡消费，不论是否就餐。</p>
+      <div class="tag-row">
+        <span class="tag-pill">变相圈钱</span>
+        <span class="tag-pill">食品安全隐患</span>
+      </div>
+    </div>
+
+    <!-- 证据5：百度负面评价 -->
+    <div class="evidence-block">
+      <h3><span class="dot"></span>百度问答"最佳答案"直言真相（2024年）</h3>
+      <div class="quote">
+        "南京建康高级技工学校，名为高级，实为困境。其内部师资力量存疑，从校长到学生管理，乃至保卫部门，似乎难觅真正合格之人。学校利用中考失败的时机，以利益诱导学生进行宣传，所宣传内容似乎口是心非，满嘴仁义道德，实质却是一肚子男盗女娼。部分教师为个人利益所驱使，竟让前十三名的学生滑落到二十七名。"
+      </div>
+      <div class="tag-row">
+        <span class="tag-pill">匿名评价</span>
+        <span class="tag-pill">百度最佳答案</span>
+        <span class="tag-pill">公开可见</span>
+      </div>
+    </div>
+
+    <!-- 证据6：招生软文矩阵 -->
+    <div class="evidence-block">
+      <h3><span class="dot"></span>付费 SEO 招生软文矩阵</h3>
+      <p>搜狐、育路网、eduzg.org.cn 等多个平台上存在格式高度一致、结构雷同的招生推广文章，显然是学校购买的 SEO 内容营销服务。这些软文将"强制收手机"包装为"准军事化管理"，将"封闭校园"包装为"远离闹市干扰"。真实的学生评价在这些平台被系统性淹没。</p>
+      <div class="tag-row">
+        <span class="tag-pill">付费软文</span>
+        <span class="tag-pill">SEO 洗地</span>
+        <span class="tag-pill">信息操纵</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 第三节：时间线 ═══════════ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <h2>时间线</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">2006年</div>
+        <div class="timeline-text">以"南京金肯技工学校"名义成立</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2008年</div>
+        <div class="timeline-text">获评"江苏省重点技工学校"</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2021年2月</div>
+        <div class="timeline-text">申请升格高级技工学校，专家组评估发现师资扣分严重</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2021年</div>
+        <div class="timeline-text">在扣分情况下获批升格为"南京建康高级技工学校"</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2022年</div>
+        <div class="timeline-text">新增消防工程技术专业，团委获"江苏省五四红旗团委"</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2023年4月</div>
+        <div class="timeline-text">黑猫投诉：学生投诉强制办校园卡，最终被系统自动关闭</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2024年</div>
+        <div class="timeline-text">百度匿名评价"名为高级实为困境"被系统标注为"最佳答案"</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2026年</div>
+        <div class="timeline-text"><strong>当前</strong>：继续在各大平台铺量 SEO 软文招生，真实负面信息被淹没</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 第四节：如果你正在考虑 ═══════════ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <h2>如果你正在考虑报考</h2>
+    </div>
+
+    <div class="alert-box">
+      <div class="alert-title">在做出决定前，请确认以下事实</div>
+      <p>
+        你的手机将在入学第一天被没收，仅在固定时段归还。<br>
+        你将被强制安装定位打卡 App，24/7 被追踪地理位置。<br>
+        你的老师中至少有15%不具备教师资格。<br>
+        如果你或你的家长提出质疑，将面临打击报复。<br>
+        学校官方宣传的教职工人数连自己都说不清。<br>
+        食堂你不吃也得刷卡付钱。<br>
+        所有投诉渠道在纸面上存在，现实中无效。
+      </p>
+    </div>
+
+    <p style="text-align:center; color: var(--text-tertiary); font-size: 0.88rem; margin-top: 20px;">
+      如果你已经是该校学生并遭受上述问题，可向以下渠道实名或匿名举报：<br>
+      <strong>南京市人社局职建处</strong> · <strong>江苏省人社厅</strong> · <strong>12345 政务服务热线</strong>
+    </p>
+  </section>
+
+  <!-- ═══════════ 第五节：参考来源 ═══════════ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+      </div>
+      <h2>参考来源</h2>
+    </div>
+    <div class="evidence-block" style="font-size: 0.85rem; line-height: 2.2; color: var(--text-secondary);">
+      · 学校官网 — <a href="https://www.jkxdu.cn/" style="color:var(--text-tertiary);">jkxdu.cn</a><br>
+      · 江苏省人社厅 — 宁人社〔2021〕28号评估文件<br>
+      · 百度百科 — 南京建康高级技工学校词条<br>
+      · 黑猫投诉平台 — 投诉编号 17365720113<br>
+      · 百度知道 — 学校负面评价"最佳答案"<br>
+      · 育路网 / 搜狐 / 中考网 — 招生软文与第三方报道<br>
+      · 《中华人民共和国民法典》第235条、第267条<br>
+      · 《中华人民共和国未成年人保护法》第4条、第11条、第70条<br>
+      · 《中华人民共和国教师法》第10条<br>
+      · 《中华人民共和国职业教育法》第4条
+    </div>
+  </section>
+
+</main>
+
+<button class="back-top" id="backTop" aria-label="返回顶部" title="返回顶部">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<footer class="footer">
+  <p>本文内容基于公开可查的官方文件、第三方平台公开信息整理，仅供信息参考。</p>
+  <p style="margin-top:6px;">最后更新：2026年7月15日</p>
+</footer>
+
+<script>
+  // 返回顶部按钮
+  const btn = document.getElementById('backTop');
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  });
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>

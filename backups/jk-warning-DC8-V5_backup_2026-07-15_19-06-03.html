@@ -39,7 +39,6 @@
     -webkit-tap-highlight-color: transparent;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    font-size: 17px;
   }
 
   body {
@@ -907,24 +906,23 @@
     margin-left: auto;
   }
 
-  /* ── 左侧浮动目录（浅色） ── */
+  /* ── 左侧浮动目录 ── */
   .sidebar-toc {
     position: fixed;
     left: 0;
     top: 50%;
     transform: translateY(-50%);
     z-index: 90;
-    background: rgba(255,255,255,0.94);
-    border: 1px solid rgba(0,0,0,0.07);
+    background: rgba(8,8,8,0.92);
+    border: 1px solid var(--card-border);
     border-left: none;
     border-radius: 0 var(--radius) var(--radius) 0;
     padding: 14px 10px;
     display: flex;
     flex-direction: column;
     gap: 2px;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    box-shadow: 0 2px 16px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     transition: transform 0.3s, opacity 0.3s;
   }
   .sidebar-toc a {
@@ -933,22 +931,21 @@
     gap: 6px;
     padding: 6px 10px;
     font-size: 0.76rem;
-    color: #5a5a5a;
+    color: var(--text-tertiary);
     text-decoration: none;
     border-left: 2px solid transparent;
-    border-radius: 0 6px 6px 0;
     transition: all 0.2s;
     white-space: nowrap;
   }
   .sidebar-toc a:hover {
-    color: #333;
-    border-left-color: rgba(229,57,53,0.45);
-    background: rgba(229,57,53,0.04);
+    color: var(--text-primary);
+    border-left-color: rgba(229,57,53,0.35);
+    background: rgba(255,255,255,0.03);
   }
   .sidebar-toc a.active {
     color: var(--accent);
     border-left-color: var(--accent);
-    background: rgba(229,57,53,0.07);
+    background: var(--accent-glass);
   }
   .sidebar-toc .sidebar-num {
     font-family: var(--font-mono);
@@ -960,11 +957,6 @@
   }
   .sidebar-toc a.active .sidebar-num { opacity: 1; }
   .sidebar-toc .sidebar-label { font-size: 0.72rem; }
-
-  /* ── 目录锚点偏移（防 sticky 顶栏遮挡） ── */
-  #problems, #evidence, #timeline, #considering, #sources, #msg-wall {
-    scroll-margin-top: 80px;
-  }
 
   @media (max-width: 1024px) {
     .sidebar-toc { display: none; }
@@ -1200,8 +1192,6 @@
         <span class="tag-pill">百度最佳答案</span>
         <span class="tag-pill">公开可见</span>
       </div>
-      <img src="百度知道_南京建康高级技工学校_评价截图.png" alt="百度知道负面评价截图" class="img-lightbox" style="max-width:100%; border:1px solid var(--border); border-radius:8px;" onclick="openLightbox(this.src)" />
-      <p style="font-size:0.75rem; color:var(--text-tertiary); margin-top:6px;">▲ 百度知道截图：学校负面评价"最佳答案"</p>
     </div>
 
     <!-- 证据6：招生软文矩阵 -->
@@ -1217,8 +1207,8 @@
 
     <!-- 证据7：宿舍面子工程 -->
     <div class="evidence-block">
-      <h3><span class="dot"></span>宿舍一楼"波将金村"式装修（2026年6月18日期末考试结束后）</h3>
-      <p>2026年6月18日期末考试结束后，学校通知全体学生：一楼宿舍全部清空，"即将装修"。然而只装修一楼——因为那是领导视察、家长参观的必经路线。二楼及以上楼层一切照旧。</p>
+      <h3><span class="dot"></span>宿舍一楼"波将金村"式装修（2026年暑假）</h3>
+      <p>2026年暑假前夕，学校通知全体学生：一楼宿舍全部清空，"即将装修"。然而只装修一楼——因为那是领导视察、家长参观的必经路线。二楼及以上楼层一切照旧。</p>
       <div class="quote">
         "只装修一楼，是给前来视察、观摩的领导和家长看的。一楼宿舍全部解体，学生被迫并入二楼，挤占原有住宿空间。就像苏联解体前的波将金村——外表光鲜的样板房背后，是拥挤不堪的真实生活。"
       </div>
@@ -1377,42 +1367,6 @@
         <span class="tag-pill">自动化催收流水线</span>
       </div>
     </div>
-    <!-- 证据13：暑期留校虚假承诺 -->
-    <div class="evidence-block">
-      <h3><span class="dot"></span>「暑期留校集训」虚假承诺：空白未盖章荣誉证书当诱饵，换取学生暑期免费劳动+食堂消费（2026年6月）</h3>
-      <p>2026年6月5日（期末考试前两周），庞群主在班级群发布暑期留校动员通知，承诺留校学生可获得"系部颁发的志愿、荣誉证书"、免费资源、迎新志愿者优先、评优评先优先、技能提升和"职教高考提前储能"。</p>
-
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:12px; margin: 16px 0;">
-        <div style="text-align:center;">
-          <img src="summer-recruit-qq.png" alt="班级群暑期留校动员截图" class="img-lightbox" style="width:100%; max-width:400px; border:1px solid var(--border); border-radius:8px;" onclick="openLightbox(this.src)" />
-          <p style="font-size:0.72rem; color:var(--text-tertiary); margin-top:4px;">▲ 群消息截图：庞群主发布的暑期留校动员通知</p>
-        </div>
-        <div style="text-align:center;">
-          <img src="summer-blank-cert.jpg" alt="实际发放的空白未盖章证书" class="img-lightbox" style="width:100%; max-width:400px; border:1px solid var(--border); border-radius:8px;" onclick="openLightbox(this.src)" />
-          <p style="font-size:0.72rem; color:var(--text-tertiary); margin-top:4px;">▲ 空白证书实物：未盖章、未签名、未填写任何信息</p>
-        </div>
-      </div>
-
-      <p><strong>拆解分析：</strong></p>
-      <ul style="font-size:0.9rem; color:var(--text-secondary); line-height:1.8; padding-left:20px; margin:8px 0;">
-        <li>证书确为本校<strong>「南京建康高级技工学校 数字产业系」</strong>颁发（非外校），但核心问题是：这是一张<strong>完全空白、未盖章</strong>的荣誉证书——没有填写姓名、身份证号、班级，也没有填写实践时长，没有系部盖章，没有负责人签名。</li>
-        <li>学校用一张空白未盖章的荣誉证书作为"系部颁发的志愿、荣誉证书"的兑现物，本质上是零成本的虚假承诺。</li>
-        <li>学生留校从事暑期劳动期间还需自付食堂消费——学校不仅没有为额外劳动支付报酬，反而从学生伙食费中二次盈利。</li>
-        <li>证书日期为2025年7月12日，疑似沿用去年模板——连日期都懒得改。</li>
-      </ul>
-
-      <div class="quote">
-        "承诺的是系部颁发的荣誉证书、评优评先优先、职教高考提前储能——拿到手的是一张连姓名都没填、连章都没有的空白纸。这就是'暑期留校集训'的真正回报：用一张空白未盖章的荣誉证书当诱饵，驱动学生暑期充当免费劳动力，学生还需自付食堂消费。"
-      </div>
-
-      <p>综合判断：空白未盖章荣誉证书吸引报名 → 学生暑期留校充当免费劳动力 → 学校从食堂消费中二次获利。这不是疏忽，是精心设计的虚假承诺诱骗流程。</p>
-
-      <div class="tag-row">
-        <span class="tag-pill">空白证书</span>
-        <span class="tag-pill">虚假承诺</span>
-        <span class="tag-pill">免费劳动+食堂消费</span>
-      </div>
-    </div>
   </section>
 
   <!-- ═══════════ 第三节：时间线 ═══════════ -->
@@ -1421,7 +1375,7 @@
       <div class="section-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
       </div>
-      <h2>时间线 &amp; 关键时间节点</h2>
+      <h2>时间线</h2>
     </div>
     <div class="timeline">
       <div class="timeline-item">
@@ -1473,8 +1427,8 @@
         <div class="timeline-text">学生处下发红头文件《2026年暑期"21天居家劳动打卡挑战"活动方案》，要求全体学生从7月15日起连续21天每日拍照打卡</div>
       </div>
       <div class="timeline-item highlight">
-        <div class="timeline-date">2026年6月中下旬</div>
-        <div class="timeline-text">期末考试（6月18日）结束后，学校启动一楼宿舍"面子工程"装修：清空一楼学生并入二楼，只为给领导视察做样板间</div>
+        <div class="timeline-date">2026年暑假</div>
+        <div class="timeline-text">一楼宿舍"面子工程"装修：清空一楼学生并入二楼，只为给领导视察做样板间</div>
       </div>
       <div class="timeline-item">
         <div class="timeline-date">2026年</div>
