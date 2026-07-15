@@ -39,7 +39,7 @@
     -webkit-tap-highlight-color: transparent;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    font-size: 17px;
+    font-size: 18.7px;
   }
 
   body {
@@ -409,6 +409,31 @@
   }
   .source-link:hover { color: var(--text-secondary); }
   .source-link svg { width: 14px; height: 14px; }
+
+  /* ── 硬件证据入口 Pill ── */
+  .hw-entry-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 22px;
+    border-radius: 26px;
+    background: var(--accent-glass);
+    color: var(--tag-text);
+    border: 1px solid rgba(229,57,53,0.25);
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: background 0.25s, border-color 0.25s, transform 0.2s, box-shadow 0.25s;
+    white-space: nowrap;
+  }
+  .hw-entry-pill:hover {
+    background: rgba(229,57,53,0.15);
+    border-color: rgba(229,57,53,0.5);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(229,57,53,0.25);
+  }
 
   /* ── 时间线 ── */
   .timeline {
@@ -975,12 +1000,14 @@
 
 <!-- ── 左侧浮动目录 ── -->
 <nav class="sidebar-toc" id="sidebarToc">
+  <a href="#" style="color:#4fc3f7;"><span class="sidebar-num" style="color:#4fc3f7;">零</span><span class="sidebar-label">宇宙安全声明</span></a>
   <a href="#problems"><span class="sidebar-num">一</span><span class="sidebar-label">七大问题</span></a>
   <a href="#evidence"><span class="sidebar-num">二</span><span class="sidebar-label">实锤证据</span></a>
   <a href="#timeline"><span class="sidebar-num">三</span><span class="sidebar-label">时间线</span></a>
   <a href="#considering"><span class="sidebar-num">四</span><span class="sidebar-label">报考警告</span></a>
   <a href="#sources"><span class="sidebar-num">五</span><span class="sidebar-label">参考来源</span></a>
   <a href="#msg-wall"><span class="sidebar-num">六</span><span class="sidebar-label">留言墙</span></a>
+  <a href="hardware-evidence.html" target="_blank" style="color:#4fc3f7;"><span class="sidebar-num" style="color:#4fc3f7;">🖥️</span><span class="sidebar-label">硬件证据</span></a>
 </nav>
 
 <!-- ⚠️ 顶部避雷横幅 -->
@@ -1044,12 +1071,14 @@
   <nav class="toc">
     <div class="toc-title">目录速览 · TABLE OF CONTENTS</div>
     <div class="toc-grid">
+      <a href="#" class="toc-item"><span class="toc-num" style="color:#4fc3f7;">零</span> 宇宙安全声明</a>
       <a href="#problems"    class="toc-item"><span class="toc-num">一</span> 七大核心问题</a>
       <a href="#evidence"    class="toc-item"><span class="toc-num">二</span> 实锤证据<span class="toc-ev-count">12 条</span></a>
       <a href="#timeline"    class="toc-item"><span class="toc-num">三</span> 时间线</a>
       <a href="#considering" class="toc-item"><span class="toc-num">四</span> 报考警告</a>
       <a href="#sources"     class="toc-item"><span class="toc-num">五</span> 参考来源</a>
       <a href="#msg-wall"    class="toc-item"><span class="toc-num">六</span> 匿名留言墙</a>
+      <a href="hardware-evidence.html" target="_blank" class="toc-item" style="border-color:rgba(79,195,247,0.3);"><span class="toc-num" style="color:#4fc3f7;">🖥️</span> 硬件配置对比证据</a>
     </div>
   </nav>
 
@@ -1412,6 +1441,11 @@
         <span class="tag-pill">虚假承诺</span>
         <span class="tag-pill">免费劳动+食堂消费</span>
       </div>
+    </div>
+
+    <!-- 硬件配置证据入口 -->
+    <div style="text-align:center; margin-top:28px; padding-top:20px; border-top:1px solid var(--divider);">
+      <a href="hardware-evidence.html" target="_blank" class="hw-entry-pill">🖥️ 硬件配置对比证据页 &mdash; 四档配置实拍对比</a>
     </div>
   </section>
 
