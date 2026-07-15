@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>金肯变建康.com — 十年四起诉讼，名字换三遍，被告席没换</title>
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --surface: rgba(255,255,255,0.04);
+    --surface-hover: rgba(255,255,255,0.07);
+    --card: rgba(255,255,255,0.055);
+    --card-border: rgba(255,255,255,0.08);
+    --text-primary: #e8e6e3;
+    --text-secondary: #b0ada8;
+    --text-tertiary: #6e6b66;
+    --accent: #e53935;
+    --accent-dim: #c62828;
+    --accent-glow: rgba(229,57,53,0.18);
+    --accent-glass: rgba(229,57,53,0.08);
+    --tag-bg: rgba(229,57,53,0.12);
+    --tag-text: #ef9a9a;
+    --badge: #ef5350;
+    --divider: rgba(255,255,255,0.06);
+    --radius-sm: 10px;
+    --radius: 16px;
+    --radius-lg: 24px;
+    --shadow-card: 0 1px 3px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.15);
+    --shadow-elevated: 0 2px 4px rgba(0,0,0,0.35), 0 8px 32px rgba(0,0,0,0.2);
+    --font: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+    --font-mono: 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--font);
+    line-height: 1.7;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(229,57,53,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 90% 80%, rgba(229,57,53,0.04) 0%, transparent 60%);
+  }
+
+  /* ── 顶部避雷横幅（黑暗森林广播 + 冷战核预警） ── */
+  @keyframes scan {
+    0% { top: -2px; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.15; }
+  }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 30px rgba(229,57,53,0.12), 0 2px 0 rgba(229,57,53,0.18); }
+    50% { box-shadow: 0 0 50px rgba(229,57,53,0.25), 0 2px 0 rgba(229,57,53,0.35); }
+  }
+  .warning-banner {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #080808;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(229,57,53,0.03) 2px, rgba(229,57,53,0.03) 4px),
+      radial-gradient(ellipse 120% 300% at 50% 0%, rgba(229,57,53,0.12) 0%, transparent 60%);
+    border-bottom: 1px solid rgba(229,57,53,0.35);
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: #e53935;
+    animation: pulse-glow 3s ease-in-out infinite;
+    overflow: hidden;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  .warning-banner::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba(229,57,53,0.4) 20%, rgba(229,57,53,0.6) 50%, rgba(229,57,53,0.4) 80%, transparent 100%);
+    animation: scan 3.5s linear infinite;
+    pointer-events: none;
+  }
+  .warning-banner .indicator {
+    width: 10px; height: 10px;
+    background: #e53935;
+    border-radius: 50%;
+    animation: blink 0.8s step-end infinite;
+    box-shadow: 0 0 8px #e53935, 0 0 20px #e53935, 0 0 40px rgba(229,57,53,0.5);
+    flex-shrink: 0;
+  }
+  .warning-banner .label {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    border: 1px solid rgba(229,57,53,0.45);
+    padding: 2px 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    background: rgba(229,57,53,0.06);
+  }
+  .warning-banner .text {
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: #ff8a80;
+    line-height: 1.4;
+  }
+  .warning-banner .mirror { display: none; }
+  @media (min-width: 600px) {
+    .warning-banner { padding: 14px 28px; gap: 14px; }
+    .warning-banner .label { font-size: 0.82rem; padding: 3px 12px; }
+    .warning-banner .text { font-size: 0.92rem; }
+    .warning-banner .mirror { display: flex; }
+  }
+
+  /* ── 宇宙安全声明 ── */
+  .cosmic-declaration {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 14px 16px 0;
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    line-height: 1.65;
+  }
+  .cd-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .cd-marker {
+    width: 6px; height: 6px;
+    background: var(--text-tertiary);
+    border-radius: 50%;
+    animation: blink 2s step-end infinite;
+    flex-shrink: 0;
+  }
+  .cd-title {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+  .cd-body p {
+    margin-bottom: 4px;
+  }
+  .cd-warning {
+    font-style: italic;
+    color: rgba(229,57,53,0.5);
+  }
+  @media (min-width: 600px) {
+    .cosmic-declaration { padding: 18px 28px 0; font-size: 0.78rem; }
+    .cd-title { font-size: 0.68rem; }
+  }
+
+  /* ── 主容器 ── */
+  .page {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 24px 16px 60px;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    padding: 56px 0 40px;
+    text-align: center;
+    position: relative;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: var(--accent-glass);
+    color: var(--tag-text);
+    border: 1px solid rgba(229,57,53,0.2);
+    padding: 5px 16px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: clamp(1.7rem, 5vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #ff8a80, #ef5350, #c62828);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero .subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 400;
+    max-width: 520px;
+    margin: 0 auto 28px;
+    line-height: 1.6;
+  }
+  .hero-divider {
+    width: 48px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+    margin: 0 auto 32px;
+    opacity: 0.7;
+  }
+
+  /* ── 快速事实卡 ── */
+  .facts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+  .fact-item {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 18px 16px;
+    text-align: center;
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+  .fact-item:hover {
+    background: var(--surface-hover);
+    box-shadow: var(--shadow-card);
+  }
+  .fact-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+  .fact-label {
+    font-size: 0.78rem;
+    color: var(--text-tertiary);
+    font-weight: 500;
+  }
+
+  /* ── 章节 ── */
+  .section {
+    margin-bottom: 48px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .section-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--accent-glass);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--accent);
+  }
+  .section-icon svg { width: 18px; height: 18px; }
+  .section h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  /* ── 问题卡片 ── */
+  .issue-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 22px 20px;
+    margin-bottom: 14px;
+    transition: background 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .issue-card:hover {
+    background: var(--surface-hover);
+    box-shadow: var(--shadow-card);
+  }
+  .issue-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .issue-number {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+  .issue-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+  }
+  .issue-card p {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+  .issue-card .law-ref {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.78rem;
+    color: var(--badge);
+    background: var(--accent-glass);
+    padding: 3px 10px;
+    border-radius: 14px;
+    font-weight: 500;
+  }
+
+  /* ── 证据块 ── */
+  .evidence-block {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 14px;
+    transition: background 0.2s;
+  }
+  .evidence-block:hover { background: var(--surface-hover); }
+  .evidence-block h3 {
+    font-size: 0.98rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .evidence-block h3 .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .evidence-block p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+  .evidence-block .quote {
+    margin: 12px 0;
+    padding: 14px 16px;
+    background: rgba(255,255,255,0.025);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.88rem;
+    color: var(--text-primary);
+    line-height: 1.7;
+    font-style: italic;
+  }
+  .evidence-block .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .tag-pill {
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    padding: 4px 12px;
+    border-radius: 14px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .source-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    font-size: 0.82rem;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .source-link:hover { color: var(--text-secondary); }
+  .source-link svg { width: 14px; height: 14px; }
+
+  /* ── 时间线 ── */
+  .timeline {
+    position: relative;
+    padding-left: 28px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 4px;
+    bottom: 4px;
+    width: 2px;
+    background: var(--divider);
+    border-radius: 1px;
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 18px;
+    padding-left: 8px;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -24px;
+    top: 7px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+    z-index: 1;
+  }
+  .timeline-date {
+    font-size: 0.72rem;
+    color: var(--text-tertiary);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    margin-bottom: 2px;
+  }
+  .timeline-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+  .timeline-item.highlight .timeline-date { color: var(--accent); font-weight: 700; }
+  .timeline-item.highlight .timeline-text { color: var(--badge); font-weight: 600; }
+  .timeline-item.highlight::before { background: var(--accent); box-shadow: 0 0 8px var(--accent-glow); }
+
+  /* ── 数据矛盾表格 ── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 0.88rem;
+    overflow-x: auto;
+    display: block;
+  }
+  .data-table thead { display: none; }
+  .data-table tr {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--divider);
+    padding: 12px 0;
+    gap: 4px 0;
+  }
+  .data-table tr:last-child { border-bottom: none; }
+  .data-table td {
+    flex: 1 1 100%;
+    color: var(--text-secondary);
+    padding: 2px 0;
+  }
+  .data-table td:first-child {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 0.84rem;
+  }
+  .data-table td.value-warn {
+    color: var(--badge);
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  @media (min-width: 500px) {
+    .data-table tr { flex-wrap: nowrap; }
+    .data-table td { flex: 1; padding: 4px 8px; }
+    .data-table td:first-child { flex: 0 0 180px; }
+  }
+
+  /* ── 警示块 ── */
+  .alert-box {
+    background: var(--accent-glass);
+    border: 1px solid rgba(229,57,53,0.25);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    margin: 28px 0;
+    text-align: center;
+  }
+  .alert-box .alert-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--badge);
+    margin-bottom: 8px;
+  }
+  .alert-box p {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  /* ── 页脚 ── */
+  .footer {
+    text-align: center;
+    padding: 40px 0 20px;
+    color: var(--text-tertiary);
+    font-size: 0.78rem;
+    border-top: 1px solid var(--divider);
+  }
+  .footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer a:hover { color: var(--text-primary); }
+
+  /* ── 纪元翻转卡片 ── */
+  .era-flip {
+    display: inline-grid;
+    cursor: pointer;
+    perspective: 200px;
+    vertical-align: baseline;
+    user-select: none;
+    -webkit-user-select: none;
+    padding: 3px 10px;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 6px;
+    transition: border-color .3s, background .3s;
+  }
+  .era-flip:hover {
+    border-color: rgba(255,255,255,.2);
+    background: rgba(255,255,255,.04);
+  }
+  .era-flip .era-front,
+  .era-flip .era-back {
+    grid-area: 1 / 1;
+    backface-visibility: hidden;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--text-secondary);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+  .era-flip .era-front {
+    transform: rotateX(0deg);
+  }
+  .era-flip .era-back {
+    transform: rotateX(180deg);
+    color: var(--accent);
+  }
+  .era-flip.flipped .era-front {
+    transform: rotateX(-180deg);
+  }
+  .era-flip.flipped .era-back {
+    transform: rotateX(0deg);
+  }
+  .era-flip:not(.flipped):hover .era-front,
+  .era-flip.flipped:hover .era-back {
+    color: var(--text-primary);
+  }
+
+  /* ── 返回顶部 ── */
+  .back-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 50;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.3s, transform 0.3s, background 0.2s;
+    box-shadow: var(--shadow-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .back-top.visible { opacity: 1; transform: translateY(0); }
+  .back-top:hover { background: var(--surface-hover); color: var(--text-primary); }
+  .back-top svg { width: 20px; height: 20px; }
+
+  /* ── 匿名留言墙 ── */
+  .msg-wall { margin-top: 20px; }
+  .msg-form {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+  .msg-form .form-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .msg-form label { font-size: 0.82rem; color: var(--text-secondary); white-space: nowrap; font-weight: 600; }
+  .msg-form input[type="text"] {
+    flex: 1;
+    min-width: 120px;
+    background: var(--surface);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-sm);
+    padding: 9px 14px;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    font-family: var(--font);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .msg-form input[type="text"]:focus { border-color: var(--accent); }
+  .msg-form textarea {
+    width: 100%;
+    min-height: 100px;
+    background: var(--surface);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    font-family: var(--font);
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s;
+    line-height: 1.6;
+  }
+  .msg-form textarea:focus { border-color: var(--accent); }
+  .msg-form .submit-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .msg-submit {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 10px 28px;
+    border-radius: 24px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: var(--font);
+    letter-spacing: 0.03em;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(229,57,53,0.3);
+  }
+  .msg-submit:hover { background: #c62828; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(229,57,53,0.4); }
+  .msg-submit:active { transform: translateY(0); }
+  .msg-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+  .msg-hint { font-size: 0.76rem; color: var(--text-tertiary); }
+  .msg-list { display: flex; flex-direction: column; gap: 12px; }
+  .msg-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    transition: background 0.2s;
+    animation: msgIn 0.35s ease-out;
+  }
+  @keyframes msgIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .msg-card:hover { background: var(--surface-hover); }
+  .msg-card .msg-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 0.78rem;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .msg-card .msg-author {
+    font-weight: 700;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .msg-card .msg-author .anon-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.7;
+  }
+  .msg-card .msg-time {
+    color: var(--text-tertiary);
+    font-size: 0.74rem;
+  }
+  .msg-card .msg-body {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    word-break: break-word;
+    white-space: pre-wrap;
+  }
+  .msg-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-tertiary);
+    font-size: 0.9rem;
+    line-height: 1.8;
+  }
+  .msg-counter {
+    font-size: 0.78rem;
+    color: var(--text-tertiary);
+    margin-bottom: 14px;
+  }
+  .msg-counter span { color: var(--accent); font-weight: 700; }
+  .msg-danger-zone {
+    text-align: right;
+    margin-top: 8px;
+  }
+  .msg-clear {
+    background: none;
+    border: 1px solid rgba(229,57,53,0.3);
+    color: var(--text-tertiary);
+    padding: 4px 14px;
+    border-radius: 14px;
+    font-size: 0.72rem;
+    cursor: pointer;
+    font-family: var(--font);
+    transition: all 0.2s;
+  }
+  .msg-clear:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-glass); }
+  .msg-toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2e7d32;
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 22px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    font-family: var(--font);
+  }
+  .msg-toast.show { opacity: 1; }
+
+  /* ── 无障碍 ── */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #faf9f7;
+      --surface: rgba(0,0,0,0.025);
+      --surface-hover: rgba(0,0,0,0.045);
+      --card: rgba(0,0,0,0.03);
+      --card-border: rgba(0,0,0,0.06);
+      --text-primary: #1a1a1c;
+      --text-secondary: #555;
+      --text-tertiary: #999;
+      --divider: rgba(0,0,0,0.08);
+      --accent-glass: rgba(229,57,53,0.06);
+      --tag-bg: rgba(229,57,53,0.08);
+      --tag-text: #c62828;
+      --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+      --shadow-elevated: 0 2px 4px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.06);
+    }
+    body {
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(229,57,53,0.03) 0%, transparent 70%);
+    }
+  }
+
+  /* ===== 图片灯箱 ===== */
+  .img-lightbox {
+    cursor: zoom-in;
+    transition: filter 0.2s;
+  }
+  .img-lightbox:hover {
+    filter: brightness(1.1);
+  }
+  .lb-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.88);
+    z-index: 99999;
+    justify-content: center;
+    align-items: center;
+    cursor: zoom-out;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  .lb-overlay.active { display: flex; }
+  .lb-overlay img {
+    max-width: 92vw;
+    max-height: 92vh;
+    border-radius: 4px;
+    box-shadow: 0 0 60px rgba(229,57,53,0.25);
+    transition: transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+  }
+  .lb-close {
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+    user-select: none;
+  }
+  .lb-close:hover { opacity: 1; }
+</style>
+</head>
+<body>
+
+<!-- ⚠️ 顶部避雷横幅 -->
+<div class="warning-banner">
+  <span class="indicator"></span>
+  <span class="label">■■ 警报 ■■</span>
+  <span class="text">南京建康高级技工学校 — 省级重点技工院校的真实面目</span>
+  <span class="label mirror">■■ 警报 ■■</span>
+  <span class="indicator mirror"></span>
+</div>
+
+<!-- ── 宇宙安全声明 ── -->
+<div class="cosmic-declaration">
+  <div class="cd-header">
+    <span class="cd-marker"></span>
+    <span class="cd-title">宇宙安全声明 · COSMIC SAFETY DECLARATION</span>
+  </div>
+  <div class="cd-body">
+    <p>本文内容基于公开可查的政府文件（江苏省人社厅、南京市人社局、南京市民政局、人民法院公开记录）、第三方平台公开信息（黑猫投诉、水滴信用、百度百科、百度知道）以及在校生亲历者陈述整理。所有引用内容均附原始链接，可自行核验。</p>
+    <p>本站仅为信息整理与风险提示，不构成任何法律建议。如有与官方信息不符之处，以官方公告为准。引用第三方平台信息不代表本站认可该平台的所有观点。</p>
+    <p class="cd-warning">本站对所有在读者，本着「不要回答」之善意，请自行判断真伪、自担风险——本声明对所有可能引发的宇宙级后果概不负责。</p>
+  </div>
+</div>
+
+<!-- ── 主容器 ── -->
+<main class="page">
+
+  <!-- Hero -->
+  <section class="hero">
+    <span class="hero-tag">⚠️ 报考预警</span>
+    <h1>避雷·南京建康<br>高级技工学校</h1>
+    <p class="subtitle">表面是"江苏省重点高级技工学校"，背后是师资注水、非法扣押手机、强制消费、举报渠道形同虚设的民办野鸡技校。本文基于公开资料与亲历者陈述整理。</p>
+    <div class="hero-divider"></div>
+  </section>
+
+  <!-- 快速事实 -->
+  <div class="facts-grid">
+    <div class="fact-item">
+      <div class="fact-value">2006</div>
+      <div class="fact-label">建校年份</div>
+    </div>
+    <div class="fact-item">
+      <div class="fact-value">172亩</div>
+      <div class="fact-label">自有校区</div>
+    </div>
+    <div class="fact-item">
+      <div class="fact-value">4000+</div>
+      <div class="fact-label">在校学生</div>
+    </div>
+    <div class="fact-item">
+      <div class="fact-value" style="color:#ff8a80;">矛盾</div>
+      <div class="fact-label">教职工数（215/219/269）</div>
+    </div>
+    <div class="fact-item">
+      <div class="fact-value">15个</div>
+      <div class="fact-label">开设专业</div>
+    </div>
+  </div>
+
+  <!-- ═══════════ 第一节：七大问题 ═══════════ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <h2>七大核心问题</h2>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-number">问题一</div>
+      <h3>强制劳动打卡，侵犯隐私</h3>
+      <p>学校强制要求学生使用定位打卡 App 进行每日劳动签到，实时追踪学生地理位置——即使在周末和节假日也不例外。学生在校期间的行动轨迹被全方位监控，隐私权受到严重侵犯。</p>
+      <span class="law-ref">《未成年人保护法》第4条 · 隐私权</span>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-number">问题二</div>
+      <h3>非法扣押手机</h3>
+      <p>入学即强制收缴手机，仅限"课余固定时段"使用。学校在招生软文中将此作为"管理亮点"宣传（"入校手机统一集中保管"），实质是对学生合法财产权的长期侵犯。《民法典》第267条明确规定私人合法财产受法律保护。</p>
+      <span class="law-ref">《民法典》第267条 · 财产权</span>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-number">问题三</div>
+      <h3>打击报复举报人</h3>
+      <p>学生或家长一旦提出质疑、投诉或向上级部门反映问题，校方不是解决问题，而是对学生进行区别对待、公开批评甚至变相处分。内部举报渠道形同虚设，敢于发声的学生面临被孤立、被针对的风险。</p>
+      <span class="law-ref">《信访条例》第3条 · 禁止打击报复</span>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-number">问题四</div>
+      <h3>师资严重注水</h3>
+      <p>2021年南京市人社局专家组评估报告明确记载：<strong>15%的专任教师不具备教师资格</strong>，具备高级职称或技师资格的占比不达标准。学校官方宣传的教职工数字在不同来源中分别为215人、219人、269人——三个版本同时存在于互联网。</p>
+      <span class="law-ref">《教师法》第10条 · 教师资格制度</span>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-number">问题五</div>
+      <h3>形式主义泛滥</h3>
+      <p>大量时间被用于非教学活动：强制参加形式化的升旗仪式、表面光鲜的校企合作摆拍、与教学无关的行政检查准备。学生实际学习时间被严重压缩，真正有价值的技能培训被边缘化。</p>
+      <p style="margin-top:10px;"><strong>最新案例（2026年暑假）：</strong>放假前学校通知一楼宿舍全部清空，原因是"装修"。然而只装修一楼——因为那是领导视察和家长参观的必经路线。一楼学生被迫拆散并入二楼宿舍，挤占他人空间。这不是改善学生住宿条件，而是为视察路线搭建"样板间"。如同苏联解体前夕的"波将金村"——外表光鲜，内部早已腐烂。</p>
+      <span class="law-ref">《职业教育法》第4条 · 教育质量</span>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-number">问题六</div>
+      <h3>办学资质存疑</h3>
+      <p>学校前身为"南京金肯技工学校"，2006年成立，2021年才升格为高级技工学校。专家组评估在师资、职称等多项指标上扣分，却依然获批升格。百度匿名评价直言其为"名为高级，实为困境"。</p>
+      <span class="law-ref">《民办教育促进法》 · 办学条件</span>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-number">问题七</div>
+      <h3>举报渠道虚设</h3>
+      <p>学校官网虽设有"监督举报公告"页面，但实际举报后无任何有效反馈和处理。对外公布的举报制度仅停留在纸面上，学生维权无门。2023年黑猫投诉平台上关于强制办卡的投诉最终因学生未进一步操作被系统自动关闭。</p>
+      <span class="law-ref">《未成年人保护法》第11条 · 强制报告</span>
+    </div>
+  </section>
+
+  <!-- ═══════════ 第二节：实锤证据 ═══════════ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+      </div>
+      <h2>实锤证据</h2>
+    </div>
+
+    <!-- 证据1：人社局评估 -->
+    <div class="evidence-block">
+      <h3><span class="dot"></span>南京市人社局专家组评估扣分（2021年）</h3>
+      <p>根据南京市人社局宁人社〔2021〕28号文件附件《专家评审分数汇总表》：</p>
+      <div class="quote">
+        "15%的专任教师不具备教师资格，扣10分"<br>
+        "具备高级职称或技师、高级技师职业资格的占比不符要求，扣10分"
+      </div>
+      <p>在师资队伍（满分140）一项中，该校自评满分，专家组实际仅给100分——扣掉40分，15%教师无证上岗，高级职称占比严重不达标。按照任何正常标准，这份评估报告等于一份"不合格"判决书。然而荒谬的是：<strong>在扣分如此严重的情况下，该校依然在同一年获批升格为"高级技工学校"</strong>。评审规则形同虚设，审批环节形同走过场。一个连基本师资底线都达不到的学校，凭什么戴上"高级"的帽子？答案恐怕不在文件里，而在文件背后那些看不见的手里。</p>
+      <div class="tag-row">
+        <span class="tag-pill">官方文件</span>
+        <span class="tag-pill">师资注水实锤</span>
+        <span class="tag-pill">扣分仍升格</span>
+        <span class="tag-pill">评审形同虚设</span>
+      </div>
+      <a class="source-link" href="https://jshrss.jiangsu.gov.cn/module/download/downfile.jsp?classid=0&filename=64b7ada5410b46869ca08f999e5b6d8e.pdf" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        江苏省人社厅原始文件 (PDF)
+      </a>
+    </div>
+
+    <!-- 证据2：黑猫投诉 -->
+    <div class="evidence-block">
+      <h3><span class="dot"></span>黑猫投诉：强制办理校园手机卡（2023年）</h3>
+      <p>走读学生被老师打电话催促办理联通校园卡，"不然过不了门禁"。办完后发现绑都没绑照样能过门禁。业务员仅说"扫码交100元"，套餐详情未告知。实际扣费49.9元/月，还被擅自加开宽带业务——走读生根本没有安装地点。</p>
+      <div class="tag-row">
+        <span class="tag-pill">强制消费</span>
+        <span class="tag-pill">欺诈扣费</span>
+        <span class="tag-pill">投诉自动关闭</span>
+      </div>
+      <a class="source-link" href="https://hlj.tousu.sina.com.cn/complaint/view/17365720113" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        黑猫投诉原始页面
+      </a>
+    </div>
+
+    <!-- 证据3：数据矛盾 -->
+    <div class="evidence-block">
+      <h3><span class="dot"></span>教职工数字三版本矛盾</h3>
+      <p>同一个学校，三个不同的官方/半官方来源给出了三个不同的教职工数字：</p>
+      <table class="data-table">
+        <tr><td>学校官方简介（jkxdu.cn）</td><td class="value-warn">269人</td><td>截至2025年3月</td></tr>
+        <tr><td>百度百科</td><td class="value-warn">219人</td><td>最后更新2024年</td></tr>
+        <tr><td>第三方招生网站（axjx.com等）</td><td class="value-warn">215人</td><td>早年数据</td></tr>
+      </table>
+      <p>这种数据混乱要么是管理粗放到连教职工人数都搞不清，要么就是人为注水夸大——三个数字中至少有两个是假的。</p>
+      <div class="tag-row">
+        <span class="tag-pill">数据造假</span>
+        <span class="tag-pill">管理混乱</span>
+        <span class="tag-pill">虚假宣传</span>
+      </div>
+    </div>
+
+    <!-- 证据4：食堂强制消费 -->
+    <div class="evidence-block">
+      <h3><span class="dot"></span>食堂强制消费</h3>
+      <p>第三方教育资讯网站（offcn.cc）引用学生反馈披露：</p>
+      <div class="quote">
+        "有同学吐槽说学校居然'强制干饭'……有的老师甚至要求'就算不吃，卡也得刷钱'。早上吃的居然有辣的，好多同学吃完肠胃直接'起义'。"
+      </div>
+      <p>食堂官方宣传为"自营食堂、食品安全"，但实际运营中强制学生在食堂刷卡消费，不论是否就餐。</p>
+      <div class="tag-row">
+        <span class="tag-pill">变相圈钱</span>
+        <span class="tag-pill">食品安全隐患</span>
+      </div>
+    </div>
+
+    <!-- 证据5：百度负面评价 -->
+    <div class="evidence-block">
+      <h3><span class="dot"></span>百度问答"最佳答案"直言真相（2024年）</h3>
+      <div class="quote">
+        "南京建康高级技工学校，名为高级，实为困境。其内部师资力量存疑，从校长到学生管理，乃至保卫部门，似乎难觅真正合格之人。学校利用中考失败的时机，以利益诱导学生进行宣传，所宣传内容似乎口是心非，满嘴仁义道德，实质却是一肚子男盗女娼。部分教师为个人利益所驱使，竟让前十三名的学生滑落到二十七名。"
+      </div>
+      <div class="tag-row">
+        <span class="tag-pill">匿名评价</span>
+        <span class="tag-pill">百度最佳答案</span>
+        <span class="tag-pill">公开可见</span>
+      </div>
+    </div>
+
+    <!-- 证据6：招生软文矩阵 -->
+    <div class="evidence-block">
+      <h3><span class="dot"></span>付费 SEO 招生软文矩阵</h3>
+      <p>搜狐、育路网、eduzg.org.cn 等多个平台上存在格式高度一致、结构雷同的招生推广文章，显然是学校购买的 SEO 内容营销服务。这些软文将"强制收手机"包装为"准军事化管理"，将"封闭校园"包装为"远离闹市干扰"。真实的学生评价在这些平台被系统性淹没。</p>
+      <div class="tag-row">
+        <span class="tag-pill">付费软文</span>
+        <span class="tag-pill">SEO 洗地</span>
+        <span class="tag-pill">信息操纵</span>
+      </div>
+    </div>
+
+    <!-- 证据7：宿舍面子工程 -->
+    <div class="evidence-block">
+      <h3><span class="dot"></span>宿舍一楼"波将金村"式装修（2026年暑假）</h3>
+      <p>2026年暑假前夕，学校通知全体学生：一楼宿舍全部清空，"即将装修"。然而只装修一楼——因为那是领导视察、家长参观的必经路线。二楼及以上楼层一切照旧。</p>
+      <div class="quote">
+        "只装修一楼，是给前来视察、观摩的领导和家长看的。一楼宿舍全部解体，学生被迫并入二楼，挤占原有住宿空间。就像苏联解体前的波将金村——外表光鲜的样板房背后，是拥挤不堪的真实生活。"
+      </div>
+      <p>这不是改善学生住宿条件的工程，而是面子工程。真正需要修葺的宿舍问题被无视，所有资源倾斜到视察路线的"样板间"上。一楼学生被牺牲，二楼学生被挤占——而这一切，只为了让校领导在视察时面上有光。</p>
+      <div class="tag-row">
+        <span class="tag-pill">面子工程</span>
+        <span class="tag-pill">牺牲学生</span>
+        <span class="tag-pill">样板间骗局</span>
+        <span class="tag-pill">亲历者陈述</span>
+      </div>
+    </div>
+
+    <!-- 证据8：拒绝走读圈钱 -->
+    <div class="evidence-block">
+      <h3><span class="dot"></span>拒绝走读申请，以"太远"之名行圈钱之实（2025—2026年）</h3>
+      <p>2025年入学时，父母为孩子申请半走读——被拒。2026年春季学期，学校将所有班主任和任课老师全部调换。学生再次提出走读申请——家住鼓楼区，学校在江宁区，寒假期间已实地论证：5:30出发乘地铁，7:10即可到达铜山站，通勤完全可行。父母已明确同意。</p>
+      <div class="quote">
+        "新班主任以'离家太远'为由拒绝走读申请。然而所谓'太远'——我自己用脚跑过，从鼓楼区坐地铁到铜山站全程不到两小时，五点半出门七点十分就到。父母同意、通勤可行、学生自愿——一个刚换来的班主任凭什么一票否决？答案很简单：你不住校，学校的宿舍费、食堂费、电费问谁收？"
+      </div>
+      <p>从2025年入学时连半走读都不给批，到2026年走读申请被一票否决——学校在逐届收紧离校自由。据当前在校生反馈，目前走读申请事实上已不再受理。这不是关心学生安全，这是把学生锁在校园里当营收来源。宿舍费、食堂强制刷卡、电费——每一个走读生都是一笔流失的收入。学校甚至懒得编一个像样的理由，"离家太远"四个字就挡回去了，连学生亲自跑过的通勤路线都懒得看一眼。</p>
+      <div class="tag-row">
+        <span class="tag-pill">拒绝走读</span>
+        <span class="tag-pill">变相圈钱</span>
+        <span class="tag-pill">亲历者实勘</span>
+        <span class="tag-pill">逐年收紧</span>
+      </div>
+    </div>
+
+    <!-- 证据9：十年诉讼编年史 -->
+    <div class="evidence-block">
+      <h3><span class="dot"></span>十年四起诉讼——从"金肯"打到"建康"</h3>
+      <p>南京建康高级技工学校原名<strong>南京市金肯技工学校</strong>（后更名"南京金肯技工学校"，2021年升格并改为现名）。企查查司法案件页面 <a href="https://www.qcc.com/csusong/sd7548b02e345e9a9a0233bf1b50f7d5.html" target="_blank" style="color:var(--accent); text-decoration:none; border-bottom:1px dashed var(--accent);" title="企查查 — 司法案件详情">（点击直达）</a> 显示该校十年间涉诉至少四起：</p>
+      <table style="width:100%; border-collapse:collapse; margin:14px 0; font-size:0.85rem; color:var(--text-primary); background:var(--bg-card); border:1px solid var(--border);">
+        <tr style="border-bottom:1px solid var(--border); color:var(--text-secondary); font-size:0.78rem;"><th style="text-align:left; padding:6px 10px;">年份</th><th style="text-align:left; padding:6px 10px;">案号</th><th style="text-align:left; padding:6px 10px;">案由</th><th style="text-align:left; padding:6px 10px;">当事人</th><th style="text-align:left; padding:6px 10px;">法院</th></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 10px;">2012</td><td style="padding:6px 10px; font-size:0.78rem;">(2012)江宁民初字第01241号</td><td style="padding:6px 10px;">追索劳动报酬纠纷</td><td style="padding:6px 10px;">姚** 诉 南京市金肯技工学校</td><td style="padding:6px 10px; font-size:0.78rem;">江宁区人民法院</td></tr>
+        <tr style="border-bottom:1px solid var(--border); background:rgba(220,38,38,0.06);"><td style="padding:6px 10px;">2012</td><td style="padding:6px 10px; font-size:0.78rem;">(2012)宁民终字第02525号</td><td style="padding:6px 10px;">追索劳动报酬纠纷（二审）</td><td style="padding:6px 10px;">金肯技工学校上诉 → 被驳回</td><td style="padding:6px 10px; font-size:0.78rem;">南京市中级人民法院</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:6px 10px;">2014</td><td style="padding:6px 10px; font-size:0.78rem;">(2014)江宁民初字第00105号</td><td style="padding:6px 10px;">劳动争议</td><td style="padding:6px 10px;">严* 诉 南京金肯技工学校</td><td style="padding:6px 10px; font-size:0.78rem;">江宁区人民法院</td></tr>
+        <tr><td style="padding:6px 10px;">2022</td><td style="padding:6px 10px; font-size:0.78rem;">(2022)苏0191民初7501号</td><td style="padding:6px 10px;">教育培训合同纠纷</td><td style="padding:6px 10px;">蒋** 诉 南京建康高级技工学校</td><td style="padding:6px 10px; font-size:0.78rem;">江宁经济技术开发区人民法院</td></tr>
+      </table>
+      <div class="quote">
+        "一所技工学校，十年间被学生告、被员工告、拖欠工资被告、教育合同纠纷被告——从金肯到建康，名字换了三遍，被告席却一直没换。更名改不了本质：一所连自己员工和学生都留不住的学校，拿什么谈'教育'？"
+      </div>
+      <p>上述案件均来源于企查查（qcc.com）的开庭公告记录。2012年的劳动报酬案还经历了二审——学校不服一审判决上诉至南京市中院，后被驳回。点击案号可跳转企查查司法案件页查看全部记录。</p>
+      <div style="text-align:center; margin:16px 0;">
+        <img src="qcc-lawsuit-evidence.png" alt="企查查开庭公告截图" class="img-lightbox" style="max-width:100%; border:1px solid var(--border); border-radius:8px;" onclick="openLightbox(this.src)" />
+        <p style="font-size:0.75rem; color:var(--text-tertiary); margin-top:6px;">▲ 企查查截图：5条开庭公告，横跨金肯/建康两个时期</p>
+      </div>
+      <div class="tag-row">
+        <span class="tag-pill">法院诉讼 ×4</span>
+        <span class="tag-pill">十年涉诉</span>
+        <span class="tag-pill">劳动报酬</span>
+        <span class="tag-pill">合同纠纷</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 第三节：时间线 ═══════════ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <h2>时间线</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">2006年</div>
+        <div class="timeline-text">以"南京金肯技工学校"名义成立</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2008年</div>
+        <div class="timeline-text">获评"江苏省重点技工学校"</div>
+      </div>
+      <div class="timeline-item highlight">
+        <div class="timeline-date">2012年</div>
+        <div class="timeline-text">员工姚某追索劳动报酬，<a href="https://www.qcc.com/csusong/sd7548b02e345e9a9a0233bf1b50f7d5.html" target="_blank" style="color:var(--accent); text-decoration:none; border-bottom:1px dashed var(--accent);" title="企查查 — 司法案件详情">(2012)江宁民初字第01241号</a>一审判学校败诉；学校上诉后被南京市中院驳回</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2014年</div>
+        <div class="timeline-text">员工严某发起劳动争议，<a href="https://www.qcc.com/csusong/sd7548b02e345e9a9a0233bf1b50f7d5.html" target="_blank" style="color:var(--accent); text-decoration:none; border-bottom:1px dashed var(--accent);" title="企查查 — 司法案件详情">(2014)江宁民初字第00105号</a>，江宁区法院审理</div>
+      </div>
+      <div class="timeline-item highlight">
+        <div class="timeline-date">2021年2月</div>
+        <div class="timeline-text">申请升格高级技工学校，专家组评估发现师资扣分严重</div>
+      </div>
+      <div class="timeline-item highlight">
+        <div class="timeline-date">2021年</div>
+        <div class="timeline-text">在扣分情况下获批升格为"南京建康高级技工学校"</div>
+      </div>
+      <div class="timeline-item highlight">
+        <div class="timeline-date">2022年</div>
+        <div class="timeline-text">学生蒋某以"教育培训合同纠纷"将学校告上法庭（<a href="https://www.qcc.com/csusong/sd7548b02e345e9a9a0233bf1b50f7d5.html" target="_blank" style="color:var(--accent); text-decoration:none; border-bottom:1px dashed var(--accent);" title="企查查 — 司法案件详情">(2022)苏0191民初7501号</a>）</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2023年4月</div>
+        <div class="timeline-text">黑猫投诉：学生投诉强制办校园卡，最终被系统自动关闭</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2024年</div>
+        <div class="timeline-text">百度匿名评价"名为高级实为困境"被系统标注为"最佳答案"</div>
+      </div>
+      <div class="timeline-item highlight">
+        <div class="timeline-date">2025年9月</div>
+        <div class="timeline-text">25级新生入学，学生申请半走读被拒，父母交涉无果</div>
+      </div>
+      <div class="timeline-item highlight">
+        <div class="timeline-date">2026年3月</div>
+        <div class="timeline-text">开学即换全部班主任+任课老师；新班主任以"离家太远"驳回走读申请（通勤实测不到2小时）</div>
+      </div>
+      <div class="timeline-item highlight">
+        <div class="timeline-date">2026年暑假</div>
+        <div class="timeline-text">一楼宿舍"面子工程"装修：清空一楼学生并入二楼，只为给领导视察做样板间</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2026年</div>
+        <div class="timeline-text"><strong>当前</strong>：继续在各大平台铺量 SEO 软文招生，真实负面信息被淹没</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 第四节：如果你正在考虑 ═══════════ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <h2>如果你正在考虑报考</h2>
+    </div>
+
+    <div class="alert-box">
+      <div class="alert-title">在做出决定前，请确认以下事实</div>
+      <p>
+        你的手机将在入学第一天被没收，仅在固定时段归还。<br>
+        你将被强制安装定位打卡 App，24/7 被追踪地理位置。<br>
+        你的老师中至少有15%不具备教师资格。<br>
+        如果你或你的家长提出质疑，将面临打击报复。<br>
+        学校官方宣传的教职工人数连自己都说不清。<br>
+        食堂你不吃也得刷卡付钱。<br>
+        即使通勤实测不到2小时、父母同意，学校也会以"离家太远"为由拒绝走读——连半走读都不给，因为你不交住宿费食堂费电费他们没钱赚。<br>
+        所有投诉渠道在纸面上存在，现实中无效。
+      </p>
+    </div>
+
+    <p style="text-align:center; color: var(--text-tertiary); font-size: 0.88rem; margin-top: 20px;">
+      如果你已经是该校学生并遭受上述问题，可向以下渠道实名或匿名举报：<br>
+      <strong><a href="https://rsj.nanjing.gov.cn/" style="color:inherit;" target="_blank">南京市人社局职建处</a></strong> · <strong><a href="https://jshrss.jiangsu.gov.cn/" style="color:inherit;" target="_blank">江苏省人社厅</a></strong> · <strong>12345 政务服务热线（电话 / 微信小程序）</strong>
+    </p>
+  </section>
+
+  <!-- ═══════════ 第五节：参考来源 ═══════════ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+      </div>
+      <h2>参考来源</h2>
+    </div>
+    <div class="evidence-block" style="font-size: 0.85rem; line-height: 2.2; color: var(--text-secondary);">
+      · 学校官网 — <a href="https://www.jkxdu.cn/" style="color:var(--text-tertiary);">jkxdu.cn</a><br>
+      · 江苏省人社厅 — 宁人社〔2021〕28号评估文件（15%教师无证、扣40分）<br>
+      · 江苏省人社厅 — <a href="https://jshrss.jiangsu.gov.cn/art/2021/5/7/art_78504_9781016.html" style="color:var(--text-tertiary);">拟批准升格为高级技工学校的公示</a>（官方公示页，与评估报告直接对比）<br>
+      · 南京市民政局 — <a href="https://mzj.nanjing.gov.cn/njsmzj/njsmzj/202507/t20250708_5602604.html" style="color:var(--text-tertiary);">全市性社会组织2024年度检查结论公告</a>（学校年检"合格"，注册资金仅500万）<br>
+      · 爱企查 — <a href="https://aiqicha.baidu.com/company_detail_95641749896467?login_type=weixin&amp;tab=operatingCondition" target="_blank" style="color:var(--accent); text-decoration:none; border-bottom:1px dashed var(--accent);" title="爱企查 — 南京建康高级技工学校经营状况">经营状况页</a>（需登录查看）<br>
+      · 企查查 — <a href="https://www.qcc.com/csusong/sd7548b02e345e9a9a0233bf1b50f7d5.html" target="_blank" style="color:var(--accent); text-decoration:none; border-bottom:1px dashed var(--accent);" title="企查查 — 南京建康高级技工学校司法案件">司法案件页</a>（教育培训合同纠纷，案号(2022)苏0191民初7501号，江宁开发区法院审理）<br>
+      · 风鸟 — <a href="https://www.riskbird.com/ent/%E5%8D%97%E4%BA%AC%E5%BB%BA%E5%BA%B7%E9%AB%98%E7%BA%A7%E6%8A%80%E5%B7%A5%E5%AD%A6%E6%A0%A1.html?entid=jxCBO0yFFukQ" target="_blank" style="color:var(--accent); text-decoration:none; border-bottom:1px dashed var(--accent);" title="风鸟 — 南京建康高级技工学校企业信息">企业信息页</a>（需登录查看）<br>
+      · 学校官方喜报 — <a href="https://www.jkxdu.cn/?list_28/69.html" style="color:var(--text-tertiary);">"升格高级技工学校"喜报</a>（自称"专家组给予高度评价"，与扣40分矛盾）<br>
+      · 百度百科 — 南京建康高级技工学校词条<br>
+      · 黑猫投诉平台 — 投诉编号 17365720113<br>
+      · 百度知道 — 学校负面评价"最佳答案"<br>
+      · 育路网 / 搜狐 / 中考网 — 招生软文与第三方报道<br>
+      · 《中华人民共和国民法典》第235条、第267条<br>
+      · 《中华人民共和国未成年人保护法》第4条、第11条、第70条<br>
+      · 《中华人民共和国教师法》第10条<br>
+      · 《中华人民共和国职业教育法》第4条
+    </div>
+  </section>
+
+  <!-- ═══════════ 第六节：匿名留言墙 ═══════════ -->
+  <section class="section msg-wall">
+    <div class="section-header">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      </div>
+      <h2>匿名留言墙</h2>
+    </div>
+    <p style="color:var(--text-secondary); font-size:0.88rem; margin-bottom:18px;">
+      说你想说的。无需注册、完全匿名、所有人可见。把你的真实经历或看法留在这里。
+    </p>
+
+    <!-- 留言表单 -->
+    <div class="msg-form">
+      <div class="form-row">
+        <label for="msgNick">你的署名</label>
+        <input type="text" id="msgNick" maxlength="20" autocomplete="off">
+      </div>
+      <textarea id="msgBody" placeholder="在这里写下你对这所学校的真实感受……" maxlength="2000"></textarea>
+      <div class="submit-row">
+        <span class="msg-hint" id="msgHint"></span>
+        <button class="msg-submit" id="msgSubmit">匿名发布</button>
+      </div>
+    </div>
+
+    <!-- 留言列表 -->
+    <div class="msg-counter" id="msgCounter"></div>
+    <div class="msg-list" id="msgList"></div>
+    <div class="msg-danger-zone">
+      <button class="msg-clear" id="msgClear" title="仅清除本地缓存（其他访客不受影响）">清空本地缓存</button>
+    </div>
+  </section>
+
+</main>
+
+<!-- 留言成功Toast -->
+<div class="msg-toast" id="msgToast">留言已发布</div>
+
+<button class="back-top" id="backTop" aria-label="返回顶部" title="返回顶部">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<footer class="footer">
+  <p>本文内容基于公开可查的官方文件、第三方平台公开信息整理，仅供信息参考。</p>
+  <p style="margin-top:6px;">最后更新：<span class="era-flip" onclick="this.classList.toggle('flipped')"><span class="era-front">危机纪元20年</span><span class="era-back">民国115年</span></span></p>
+</footer>
+
+<script>
+  /* ====== 返回顶部按钮 ====== */
+  const btn = document.getElementById('backTop');
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  });
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  /* ====== 匿名留言墙 ====== */
+  (function () {
+    const STORAGE_KEY = 'jk-warning-msgs';
+    const nickInput    = document.getElementById('msgNick');
+    const bodyInput    = document.getElementById('msgBody');
+    const submitBtn    = document.getElementById('msgSubmit');
+    const listEl       = document.getElementById('msgList');
+    const counterEl    = document.getElementById('msgCounter');
+    const hintEl       = document.getElementById('msgHint');
+    const toastEl      = document.getElementById('msgToast');
+    const clearBtn     = document.getElementById('msgClear');
+
+    /* 随机匿名署名 */
+    const ADJECTIVES = ['愤怒的','心寒的','失望的','清醒的','沉默的','不愿沉默的','被欺骗的','后悔的','看穿的','躲过一劫的','转学的','退学的','路过的','围观的','毕业的','在校的'];
+    const NOUNS      = ['学生','家长','路人','过来人','学姐','学长','旁观者','知情者','前教师','观察者'];
+    function randomNick() {
+      return ADJECTIVES[Math.floor(Math.random() * ADJECTIVES.length)]
+           + NOUNS[Math.floor(Math.random() * NOUNS.length)]
+           + Math.floor(Math.random() * 900 + 100);
+    }
+
+    /* 本地昵称记忆——同一浏览器同一个署名 */
+    if (!nickInput.value) {
+      const saved = localStorage.getItem('jk-warning-nick');
+      nickInput.value = saved || randomNick();
+    }
+    nickInput.addEventListener('change', () => {
+      localStorage.setItem('jk-warning-nick', nickInput.value.trim() || randomNick());
+    });
+
+    /* 读取留言 */
+    function loadMessages() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      } catch(e) { return []; }
+    }
+
+    /* 保存留言 */
+    function saveMessages(msgs) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(msgs));
+    }
+
+    /* 格式化时间 */
+    function fmtTime(ts) {
+      const d = new Date(ts);
+      const pad = n => String(n).padStart(2,'0');
+      return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+    }
+
+    /* 渲染留言列表 */
+    function render() {
+      const msgs = loadMessages();
+      counterEl.innerHTML = msgs.length
+        ? `共 <span>${msgs.length}</span> 条留言（本机可见；部署数据库后跨设备同步）`
+        : '';
+
+      if (msgs.length === 0) {
+        listEl.innerHTML = '<div class="msg-empty">还没有留言。<br>写下第一条，把真相留在这里。</div>';
+        return;
+      }
+
+      listEl.innerHTML = msgs
+        .sort((a,b) => b.ts - a.ts)
+        .map(m => `
+          <div class="msg-card">
+            <div class="msg-meta">
+              <span class="msg-author"><span class="anon-dot"></span>${escHtml(m.nick)}</span>
+              <span class="msg-time">${fmtTime(m.ts)}</span>
+            </div>
+            <div class="msg-body">${escHtml(m.body)}</div>
+          </div>
+        `).join('');
+    }
+
+    function escHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    /* Toast */
+    let toastTimer;
+    function showToast(msg) {
+      toastEl.textContent = msg;
+      toastEl.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2000);
+    }
+
+    /* 更新字数提示 */
+    bodyInput.addEventListener('input', () => {
+      const len = bodyInput.value.length;
+      hintEl.textContent = len ? `${len}/2000` : '';
+    });
+
+    /* 提交 */
+    submitBtn.addEventListener('click', () => {
+      const nick = (nickInput.value.trim() || randomNick()).slice(0, 20);
+      const body = bodyInput.value.trim();
+      if (!body) { showToast('请先写点什么再发布'); return; }
+      if (body.length > 2000) { showToast('内容过长，请精简到 2000 字以内'); return; }
+
+      submitBtn.disabled = true;
+
+      const msgs = loadMessages();
+      msgs.push({ nick, body, ts: Date.now() });
+      saveMessages(msgs);
+      render();
+
+      bodyInput.value = '';
+      hintEl.textContent = '';
+      submitBtn.disabled = false;
+      showToast('留言已发布');
+      window.scrollTo({ top: listEl.offsetTop - 100, behavior: 'smooth' });
+    });
+
+    /* Ctrl+Enter 快捷提交 */
+    bodyInput.addEventListener('keydown', e => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        e.preventDefault();
+        submitBtn.click();
+      }
+    });
+
+    /* 清空按钮（仅本机 localStorage） */
+    if (clearBtn) {
+      clearBtn.addEventListener('click', () => {
+        if (confirm('确定清空本机缓存的全部留言吗？这不影响其他访客的浏览器。')) {
+          localStorage.removeItem(STORAGE_KEY);
+          render();
+          showToast('本机缓存已清空');
+        }
+      });
+    }
+
+    /* 初始渲染 */
+    render();
+  })();
+</script>
+<!-- 灯箱 -->
+<div class="lb-overlay" id="lightbox" onclick="closeLightbox()">
+  <span class="lb-close">&times;</span>
+  <img id="lightbox-img" src="" alt="放大截图" />
+</div>
+<script>
+function openLightbox(src) {
+  const lb = document.getElementById('lightbox');
+  const img = document.getElementById('lightbox-img');
+  img.src = src;
+  lb.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  const lb = document.getElementById('lightbox');
+  lb.classList.remove('active');
+  document.body.style.overflow = '';
+}
+</script>
+
+</body>
+</html>
