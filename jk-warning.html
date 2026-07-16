@@ -2195,10 +2195,14 @@ function closeLightbox() {
 
 <!-- BGM -->
 <audio id="bgm" src="bgm-wutianjia.m4a" autoplay loop preload="auto"></audio>
-<button id="bgm-btn" title="音乐开关" onclick="
+<button id="bgm-btn" title="点击播放音乐" onclick="
   var a=document.getElementById('bgm'),b=document.getElementById('bgm-btn');
-  if(a.paused){a.play();b.textContent='🔊';}else{a.pause();b.textContent='🔇';}
-">🔊</button>
+  if(a.paused||a.muted){
+    a.muted=false;a.volume=0.35;a.play();b.textContent='🔊';b.title='音乐播放中，点击静音';
+  }else{
+    a.pause();b.textContent='🔇';b.title='已暂停，点击播放';
+  }
+">🔇</button>
 <style>
 #bgm-btn {
   position: fixed; bottom: 20px; right: 20px;
