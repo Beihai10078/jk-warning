@@ -2192,5 +2192,29 @@ function closeLightbox() {
     s.parentNode.insertBefore(bp, s);
 })();
 </script>
+
+<!-- BGM -->
+<audio id="bgm" src="bgm-wutianjia.m4a" autoplay loop preload="auto"></audio>
+<button id="bgm-btn" title="音乐开关" onclick="
+  var a=document.getElementById('bgm'),b=document.getElementById('bgm-btn');
+  if(a.paused){a.play();b.textContent='🔊';}else{a.pause();b.textContent='🔇';}
+">🔊</button>
+<style>
+#bgm-btn {
+  position: fixed; bottom: 20px; right: 20px;
+  z-index: 9999; background: var(--card); border: 1px solid var(--card-border);
+  border-radius: 50%; width: 44px; height: 44px;
+  font-size: 1.1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(8px); transition: all 0.2s;
+  color: var(--text-primary);
+}
+#bgm-btn:hover { background: var(--surface-hover); transform: scale(1.1); }
+</style>
+
+<script>
+(function(){var a=document.getElementById('bgm');
+a.volume=0.35;a.play().catch(function(){a.muted=true;a.play();});})();
+</script>
 </body>
 </html>
