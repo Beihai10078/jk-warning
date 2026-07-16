@@ -4,7 +4,7 @@
 
 ## 在线访问
 
-- **[避雷主页](https://beihai10078.github.io/jk-warning/)** — 完整时间线、实锤证据、报考警告
+- **[避雷主页](https://beihai10078.github.io/jk-warning/jk-warning.html)** — 完整时间线、实锤证据、报考警告
 - **[硬件配置对比](https://beihai10078.github.io/jk-warning/hardware-evidence.html)** — 四间教室配置实拍，领导可视度决定硬件等级
 
 ## 关于本项目
