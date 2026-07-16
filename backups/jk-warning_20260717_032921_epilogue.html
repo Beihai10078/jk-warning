@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>从金肯到建康：古月依旧照今尘</title>
+<title>南京建康高级技工学校避雷页 | 十年四起诉 名字换三遍</title>
 <meta name="description" content="南京建康高级技工学校（原金肯技工学校）避雷页。十年四次被起诉，校名换三遍。收录实锤证据、时间线、报考警告，硬件配置对比。">
 <meta name="keywords" content="南京建康高级技工学校,金肯技工学校,避雷,报考避雷,技校避雷,南京技校,建康技工学校,金肯变建康,十年四起诉">
 <meta name="robots" content="index, follow">
 <meta name="google-site-verification" content="m9h6j1Tx8mnfVjR5Gw4YydzeHJlYr_O05aWzm1Idres">
 <meta name="msvalidate.01" content="4A9380B956FDE9AE23037D9E1450AE61">
-<meta property="og:title" content="从金肯到建康：古月依旧照今尘">
+<meta property="og:title" content="南京建康高级技工学校避雷页 | 十年四起诉 名字换三遍">
 <meta property="og:description" content="南京建康高级技工学校（原金肯技工学校）避雷页。十年四次被起诉，校名换三遍。收录实锤证据、时间线、报考警告，硬件配置对比。">
 <meta property="og:type" content="website">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><text y='56' font-size='56'>⚠️</text></svg>" />
@@ -472,7 +472,7 @@
     text-decoration: none;
     letter-spacing: 0.04em;
     transition: background 0.25s, border-color 0.25s, transform 0.2s, box-shadow 0.25s;
-    white-space: normal;
+    white-space: nowrap;
   }
   .hw-entry-pill:hover {
     background: rgba(229,57,53,0.15);
@@ -1089,190 +1089,12 @@
   @media (max-width: 1024px) { .sidebar-fold { display: none; } }
 
   /* ── 目录锚点偏移（防 sticky 顶栏遮挡） ── */
-  #safety, #problems, #evidence, #timeline, #considering, #sources, #msg-wall, #epilogue {
+  #safety, #problems, #evidence, #timeline, #considering, #sources, #msg-wall {
     scroll-margin-top: 80px;
   }
 
   @media (max-width: 1024px) {
     .sidebar-toc { display: none; }
-  }
-
-  /* ===== 移动端适配 @media (max-width: 768px) ===== */
-  @media (max-width: 768px) {
-    /* 全局触控优化 & 防溢出 */
-    body {
-      touch-action: manipulation;
-      zoom: 1;
-    }
-    html { font-size: 16px; }
-
-    /* 容器 */
-    .page { padding: 20px 12px 48px; }
-
-    /* 按钮触控区 48px+ */
-    .back-top, #bgm-btn {
-      width: 48px; height: 48px;
-    }
-    .back-top { bottom: 16px; right: 16px; }
-    .back-top svg { width: 22px; height: 22px; }
-    #bgm-btn { bottom: 16px; left: 16px; font-size: 1.2rem; }
-
-    /* 锚点偏移防顶栏遮挡 */
-    #safety, #problems, #evidence, #timeline, #considering, #sources, #msg-wall, #epilogue {
-      scroll-margin-top: 60px;
-    }
-
-    /* ── 警告横幅 ── */
-    .warning-banner {
-      padding: 10px 12px;
-      gap: 8px;
-    }
-    .warning-banner .label {
-      font-size: 0.7rem;
-      padding: 2px 8px;
-      letter-spacing: 0.08em;
-    }
-    .warning-banner .text {
-      font-size: 0.76rem;
-      flex: 1 1 auto;
-      min-width: 0;
-    }
-    .warning-banner .indicator {
-      width: 8px; height: 8px;
-    }
-
-    /* ── Hero ── */
-    .hero {
-      padding: 36px 0 28px;
-    }
-    .hero h1 {
-      font-size: clamp(1.4rem, 6vw, 2rem);
-    }
-    .hero .subtitle {
-      font-size: 0.88rem;
-      padding: 0 4px;
-    }
-    .hero-tag {
-      font-size: 0.75rem;
-      padding: 4px 12px;
-    }
-    .hero-divider { margin-bottom: 24px; }
-
-    /* ── 快速事实卡 ── */
-    .facts-grid {
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 8px;
-    }
-    .fact-item { padding: 14px 10px; }
-    .fact-value { font-size: 1.2rem; }
-    .fact-label { font-size: 0.7rem; }
-
-    /* ── 节标题 ── */
-    .section-header { gap: 8px; }
-    .section h2 { font-size: 1.1rem; }
-    .section-icon {
-      width: 30px; height: 30px;
-      border-radius: 8px;
-    }
-    .section-icon svg { width: 16px; height: 16px; }
-    .section { margin-bottom: 36px; }
-
-    /* ── 问题卡片 ── */
-    .issue-card { padding: 16px 14px; }
-    .issue-card h3 { font-size: 0.95rem; }
-    .issue-card p { font-size: 0.85rem; }
-
-    /* ── 硬件入口 Pill ── */
-    .hw-entry-pill {
-      white-space: normal;
-      font-size: 0.82rem;
-      padding: 10px 16px;
-      text-align: center;
-    }
-
-    /* ── 目录 / 证据索引 Grid ── */
-    .toc-grid, .ev-index-list {
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    }
-    .ev-index-list { font-size: 0.76rem; }
-    .toc { padding: 16px 14px; margin: 24px auto 32px; }
-    .toc-item { font-size: 0.78rem; padding: 8px 10px; }
-
-    /* ── 证据块 ── */
-    .evidence-block {
-      padding: 16px 14px;
-      scroll-margin-top: 60px;
-    }
-    .evidence-block h3 { font-size: 0.92rem; }
-    .evidence-block p { font-size: 0.85rem; }
-    .evidence-block .quote {
-      padding: 10px 12px;
-      font-size: 0.82rem;
-    }
-
-    /* ── 数据表格 ── */
-    .data-table {
-      font-size: 0.78rem;
-    }
-    .data-table td:first-child { font-size: 0.78rem; }
-    .data-table td.value-warn { font-size: 0.85rem; }
-
-    /* ── 时间线 ── */
-    .timeline { padding-left: 20px; }
-    .timeline::before { left: 5px; }
-    .timeline-item { padding-left: 6px; }
-    .timeline-item::before {
-      left: -17px;
-      width: 8px; height: 8px;
-      top: 6px;
-    }
-    .timeline-date { font-size: 0.68rem; }
-    .timeline-text { font-size: 0.84rem; }
-
-    /* ── 警示块 ── */
-    .alert-box { padding: 16px 14px; }
-    .alert-box .alert-title { font-size: 0.92rem; }
-    .alert-box p { font-size: 0.82rem; }
-
-    /* ── 图片灯箱 ── */
-    .lb-overlay img { max-width: 96vw; }
-
-    /* ── 留言墙表单 ── */
-    .msg-form .form-row {
-      flex-direction: column;
-      align-items: stretch;
-    }
-    .msg-form input[type="text"] {
-      min-width: auto;
-      width: 100%;
-    }
-    .msg-form label { margin-bottom: 4px; }
-    .msg-form .submit-row {
-      flex-direction: column;
-      gap: 8px;
-      align-items: stretch;
-    }
-    .msg-submit { width: 100%; text-align: center; }
-
-    /* ── 结语区 ── */
-    #epilogue [style*="max-width:720px"] {
-      font-size: 0.92rem !important;
-      line-height: 1.85 !important;
-    }
-    #epilogue p[style*="font-size:1.2rem"],
-    #epilogue p[style*="font-size:1.1rem"] {
-      font-size: 0.95rem !important;
-    }
-
-    /* ── 侧边栏 ── */
-    .sidebar-toc, .sidebar-fold { display: none; }
-
-    /* ── 宇宙安全声明 ── */
-    .cosmic-declaration { padding: 10px 12px 0; font-size: 0.72rem; }
-    .cd-title { font-size: 0.6rem; }
-
-    /* ── 页脚 ── */
-    .footer { padding: 28px 0 16px; font-size: 0.72rem; }
   }
 </style>
 <!-- ====== CSS END / BODY START ====== -->
@@ -1291,7 +1113,6 @@
   <a href="#msg-wall"><span class="sidebar-num">六</span><span class="sidebar-label">留言墙</span></a>
   <a href="hardware-evidence.html" target="_blank"><span class="sidebar-num">七</span><span class="sidebar-label">硬件证据</span></a>
   <a href="campus-photos.html" target="_blank"><span class="sidebar-num">八</span><span class="sidebar-label">校园实拍</span></a>
-  <a href="#epilogue"><span class="sidebar-num">九</span><span class="sidebar-label">结语</span></a>
 </nav>
 <button class="sidebar-fold" id="sidebarFold" title="展开目录" aria-label="展开目录"><span>▶</span></button>
 
@@ -1367,7 +1188,6 @@
       <a href="#msg-wall"    class="toc-item"><span class="toc-num">六</span> 匿名留言墙</a>
       <a href="hardware-evidence.html" target="_blank" class="toc-item"><span class="toc-num">七</span> 硬件配置对比证据</a>
       <a href="campus-photos.html" target="_blank" class="toc-item"><span class="toc-num">八</span> 校园实拍</a>
-      <a href="#epilogue" class="toc-item"><span class="toc-num">九</span> 结语</a>
     </div>
   </nav>
 
@@ -1446,7 +1266,7 @@
     <!-- 证据目录速览 -->
     <div class="ev-index">
       <details>
-        <summary>📋 证据目录速览（共22条，点击展开）</summary>
+        <summary>📋 证据目录速览（共20条，点击展开）</summary>
         <ol class="ev-index-list">
           <li><a href="#ev01">人社局专家组评估扣分（2021）</a></li>
           <li><a href="#ev02">黑猫投诉平台用户投诉</a></li>
@@ -1468,8 +1288,6 @@
           <li><a href="#ev18">酷安乐校通评分造假</a></li>
           <li><a href="#ev19">匠心馆面子工程+阶级分化</a></li>
           <li><a href="#ev20">校园面积过小</a></li>
-          <li><a href="#ev21">教师专车</a></li>
-          <li><a href="#ev22">展示长廊</a></li>
         </ol>
       </details>
     </div>
@@ -1918,51 +1736,6 @@
       </div>
     </div>
 
-    <!-- 证据21：教师专车 -->
-    <div class="evidence-block" id="ev21">
-      <h3><span class="dot"></span><span class="ev-num">证据21</span>教师专车——车身喷「不得从事商业运营」，实际仅限教师通勤，走读生从未获准乘坐</h3>
-      <p>学校拥有一辆大巴车，车身喷涂学校校徽，并标注类似「不得从事商业运营」的警示标语。该车每天早自习时段停靠于竞技馆一楼108教室落地窗外路边，教师下车进入校园；下午下课后再次出现在校门口接教师离校。</p>
-      <p>108教室靠窗为落地窗，窗外即马路，目视即可确认车辆停靠与教师上下车过程——属亲历者第一视角观察。亲历者曾询问班里多位走读生，一致表示从未坐过该车，该车辆仅服务教职员工通勤，不向学生开放。</p>
-
-      <div style="background:var(--tag-bg); border-left:3px solid var(--accent); padding:10px 14px; margin:12px 0; border-radius:0 8px 8px 0; font-size:0.82rem; color:var(--text-secondary);">
-        <strong>⚠️ 待补充</strong>：车牌号及车身照片（含「不得从事商业运营」标语）将于下学期开学后补拍。
-      </div>
-
-      <p style="font-size:0.82rem;color:var(--text-secondary);margin-top:8px;">
-        讽刺之处在于：学校本身为民办营利机构，通过学费、住宿费、食堂费等渠道获取收入，却在自有车辆上标注「不得从事商业运营」；同时该车作为学校资产仅服务教师通勤，走读生从未获准乘坐，「以学生为本」流于口号。
-      </p>
-
-      <div class="tag-row">
-        <span class="tag-pill">教师专车</span>
-        <span class="tag-pill">双重标准</span>
-        <span class="tag-pill">非营利口号</span>
-        <span class="tag-pill">待补图</span>
-      </div>
-    </div>
-
-    <!-- 证据22：竞技馆展示长廊 -->
-    <div class="evidence-block" id="ev22">
-      <h3><span class="dot"></span><span class="ev-num">证据22</span>竞技馆展示长廊——模范展览、教师身份牌与招生广告合一的「面子工程」</h3>
-      <p>竞技馆前设有一排展示长廊，陈列获奖学生与获奖教师的照片及简介，整体逻辑与匠心馆类似，属于典型的「面子工程」——挑选个别典型进行集中展示，以营造学校形象光鲜的表象。</p>
-      <p>部分教师在长廊展板上自称「中共党员」，其身份真伪无从验证——学校层面从未公示过党员名单或组织关系证明，展板上的政治身份标注缺乏独立核实渠道。</p>
-      <p>长廊同时张贴招生宣传内容及录取大专相关广告，将荣誉展示与商业招生混在同一空间——同一面墙上，左边是教师模范照和「中共党员」头衔，右边是招生简章和录取喜报，荣誉、政治、商业三合一，毫无边界感。</p>
-      <p style="font-size:0.82rem;color:var(--text-secondary);margin-top:8px;">
-        讽刺之处在于：一面用政治身份装点门面、营造「正规」「红色」的虚假信任感，一面在同一个展示空间做招生生意——荣誉展板与招生广告仅几步之隔，参观者看完成就展示，转身就是「欢迎报考」。
-      </p>
-
-      <div style="background:var(--tag-bg); border-left:3px solid var(--accent); padding:10px 14px; margin:12px 0; border-radius:0 8px 8px 0; font-size:0.82rem; color:var(--text-secondary);">
-        <strong>⚠️ 待补充</strong>：展示长廊实景照片将于下学期开学后补拍。
-      </div>
-
-      <div class="tag-row">
-        <span class="tag-pill">展示长廊</span>
-        <span class="tag-pill">面子工程</span>
-        <span class="tag-pill">身份政治</span>
-        <span class="tag-pill">招生广告</span>
-        <span class="tag-pill">待补图</span>
-      </div>
-    </div>
-
     <!-- 硬件配置证据入口 -->
     <div style="text-align:center; margin-top:28px; padding-top:20px; border-top:1px solid var(--divider);">
       <a href="hardware-evidence.html" target="_blank" class="hw-entry-pill">🖥️ 硬件配置对比证据页 &mdash; 四档配置实拍对比</a>
@@ -2131,50 +1904,6 @@
     </div>
     <div style="text-align:center; margin-top:16px;">
       <a href="campus-photos.html" target="_blank" class="hw-entry-pill">📷 校园实拍 &mdash; 宿舍 / 教学楼 / 公共区域环境实录</a>
-    </div>
-  </section>
-
-  <!-- ═══════════ 第九节：结语 ═══════════ -->
-  <section class="section" id="epilogue">
-    <div class="section-header">
-      <div class="section-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-      </div>
-      <div>
-        <h2>九 · 结语</h2>
-        <p class="section-sub">写在离开展厅之前</p>
-      </div>
-    </div>
-
-    <div style="max-width:720px;margin:0 auto;line-height:2;font-size:1.05rem;color:var(--text-secondary);">
-      <p style="font-size:1.2rem;color:var(--text-primary);font-weight:600;">二十条证据，一部春秋。</p>
-
-      <p>从人社局扣分到知乎校友证言，从乐校通评分造假到匠心馆面子工程，从十年四起诉讼到"古月照今尘"BGM——这个页面不是情绪宣泄，是一份用公开信息拼出的拼图。每一块都有出处，每一条都有截图，每一句话都欢迎验证。</p>
-
-      <p style="font-size:1.1rem;color:var(--text-primary);font-weight:600;">我们不是「黑」谁。我们只是把散落在各处的碎片拼在一起，让下一届学生和家长在做决定之前，多一个参考维度。</p>
-
-      <p>有些学校怕被人看到真实的样子，所以把门锁得紧紧的。但古月照今尘——月光不分门里门外，照到的都是一样的真相。</p>
-
-      <p>你不需要信我们。你只需要点开每一个链接，看每一张截图，然后自己做判断。</p>
-
-      <p style="font-size:1.1rem;color:var(--text-primary);font-weight:600;">报考之前，先看看这里。看完之后，自己做决定。</p>
-
-      <p>如果你也觉得这些信息有用，请转发给更多的人。扫码把这一页送出去：</p>
-
-      <div style="text-align:center;margin:20px 0;">
-        <img src="jk-warning-qr.png" alt="扫码访问避雷页" style="width:160px;height:160px;border-radius:12px;border:2px solid var(--card-border);background:var(--card);">
-        <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;">扫一扫，把真相递给下一个人</p>
-      </div>
-
-      <blockquote style="border-left:3px solid var(--accent);padding-left:16px;margin:24px 0;color:var(--text-secondary);font-style:italic;">
-        "莫负古圣贤，效历朝英雄——再造一个辉煌的汉疆和唐土。"
-      </blockquote>
-
-      <p>我们可能造不了王朝，但至少可以造一份透明。</p>
-
-      <hr style="border:none;border-top:1px solid var(--card-border);margin:32px 0;">
-
-      <p style="font-size:0.9rem;color:var(--text-muted);text-align:center;">本站所有内容均可自由转载，无需授权。你有权知道真相。<br><a href="epilogue.html" target="_blank" style="color:var(--accent);text-decoration:none;font-size:0.85rem;">🔗 独立页面版（可单独分享）</a></p>
     </div>
   </section>
 

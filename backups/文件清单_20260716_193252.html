@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>jk-warning 项目文件清单</title>
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --card: rgba(255,255,255,0.04);
+    --text: #e8e6e3;
+    --text2: #b0ada8;
+    --accent: #e53935;
+    --border: rgba(255,255,255,0.08);
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;
+    line-height: 1.7; padding: 40px; max-width: 960px; margin: auto;
+  }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  .update { color: var(--text2); font-size: 0.85rem; margin-bottom: 32px; }
+  h2 {
+    font-size: 1.1rem; margin: 32px 0 10px;
+    padding-bottom: 6px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 8px;
+  }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
+  th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); }
+  th { color: var(--text2); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+  td:first-child { font-family: 'Cascadia Code','Fira Code',monospace; font-size: 0.85rem; color: #ef9a9a; min-width: 200px; word-break: break-all; }
+  td:last-child { font-size: 0.9rem; }
+  .section { background: var(--card); border-radius: var(--radius); padding: 16px 20px; margin-bottom: 16px; }
+  .section h2 { margin-top: 0; border: none; }
+  .links { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .links a { color: var(--accent); text-decoration: none; }
+  .links a:hover { text-decoration: underline; }
+  .tag { font-size: 0.7rem; background: rgba(229,57,53,0.15); color: #ef9a9a; padding: 2px 8px; border-radius: 4px; }
+  ul { list-style: none; }
+  ul li { padding: 2px 0; font-size: 0.9rem; }
+  ul li::before { content: '• '; color: var(--accent); }
+</style>
+</head>
+<body>
+
+<h1>jk-warning 项目文件清单</h1>
+<p class="update">最后更新：2026-07-16</p>
+
+<div class="section">
+<h2>🏠 核心页面</h2>
+<table>
+<tr><th>文件</th><th>说明</th></tr>
+<tr><td>index.html <span class="tag">81 KB</span></td><td>避雷页本体，Netlify 部署入口。含完整时间线、证据、SEO 标签</td></tr>
+<tr><td>jk-warning.html <span class="tag">81 KB</span></td><td>index.html 的副本，内容完全一致</td></tr>
+<tr><td>hardware-evidence.html <span class="tag">27 KB</span></td><td>硬件配置对比页，3050 实锤 + 装机室 vs 推荐配置</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>💻 3050 实锤截图</h2>
+<table>
+<tr><th>文件</th><th>说明</th></tr>
+<tr><td>3050-i5-12490F.png</td><td>系统信息：i5-12490F + RTX 3050 + 16GB</td></tr>
+<tr><td>3050-rtx3050-gpu.jpg</td><td>GPU-Z：RTX 3050 笔记本电脑版</td></tr>
+<tr><td>3050-gpu.jpg</td><td>同 rtx3050-gpu.jpg（重复副本）</td></tr>
+<tr><td>3050-sysinfo.jpg</td><td>系统信息截图（重复副本）</td></tr>
+<tr><td>3050/1000017299.jpg</td><td>装机室实拍照片</td></tr>
+<tr><td>3050/1000017301.jpg</td><td>装机室实拍照片</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>🏢 欧帝官网存档</h2>
+<table>
+<tr><th>文件</th><th>说明</th></tr>
+<tr><td>odin-pages/odin-homepage.html</td><td>欧帝科技官网首页</td></tr>
+<tr><td>odin-pages/odin-all-in-one.html</td><td>欧帝全系列产品页</td></tr>
+<tr><td>odin-pages/odin-x-smart-board.html</td><td>欧帝 X 系列智慧黑板详情页</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>📄 PDF 证据</h2>
+<table>
+<tr><th>文件</th><th>说明</th></tr>
+<tr><td>南京市人社局关于推荐南京建康技工学院申办高级技工学校的请示.pdf <span class="tag">3632 KB</span></td><td>人社局官方公文</td></tr>
+<tr><td>试卷宝_2026年暑期21天居家劳动打卡挑战_1784110049013.pdf <span class="tag">1155 KB</span></td><td>暑期打卡任务 PDF</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>📸 网页截屏</h2>
+<table>
+<tr><th>文件</th><th>说明</th></tr>
+<tr><td>evidence-new.png</td><td>Google「南京建康高级技工学校 避雷」搜索结果</td></tr>
+<tr><td>qcc-lawsuit-evidence.png</td><td>企查查诉讼记录</td></tr>
+<tr><td>百度知道_南京建康高级技工学校_评价截图.png</td><td>百度知道评价</td></tr>
+<tr><td>summer-blank-cert.jpg</td><td>暑期空白证书</td></tr>
+<tr><td>summer-recruit-qq.png</td><td>暑期招生 QQ 群</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>📱 手机实拍</h2>
+<ul>
+  <li>IMG_20260715_175018.jpg — 手机拍摄 1</li>
+  <li>IMG_20260715_183020.jpg — 手机拍摄 2</li>
+  <li>IMG_20260715_220606.png — 手机截屏</li>
+  <li>Image_1784109153255_212.jpg — 从 heic 转换</li>
+  <li>Image_1784109156076_669.jpg — 从 heic 转换</li>
+  <li>Image_1784126660916_905.jpg — 手机照片</li>
+  <li>Image_1784126663591_581.jpg — 手机照片</li>
+  <li>Image_1784109153255_212.heic — 原始格式（不部署）</li>
+  <li>Image_1784109156076_669.heic — 原始格式（不部署）</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>📝 文档</h2>
+<table>
+<tr><th>文件</th><th>说明</th></tr>
+<tr><td>README.md</td><td>GitHub 仓库说明</td></tr>
+<tr><td>pending_evidence_notes.md</td><td>待处理证据备忘</td></tr>
+<tr><td>README_FILES.md</td><td>Markdown 版文件清单</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>📦 历史备份（backups/）</h2>
+<table>
+<tr><th>文件</th><th>时间</th><th>里程碑</th></tr>
+<tr><td>jk-warning_backup_...214215.html</td><td>7/15 21:42</td><td>初始备份</td></tr>
+<tr><td>jk-warning_...215203_baiduzhidao.html</td><td>7/15 21:52</td><td>加入百度知道</td></tr>
+<tr><td>jk-warning_...215823_mianzi.html</td><td>7/15 21:58</td><td>面子证据</td></tr>
+<tr><td>jk-warning_...221117_summer_trap.html</td><td>7/15 22:11</td><td>暑期陷阱</td></tr>
+<tr><td>jk-warning_...221311_after_evidence13.html</td><td>7/15 22:13</td><td>第 13 条证据</td></tr>
+<tr><td>jk-warning_...221544_evidence13_fix.html</td><td>7/15 22:15</td><td>证据 13 修正</td></tr>
+<tr><td>jk-warning_...225150_pre_hardware_page.html</td><td>7/15 22:51</td><td>硬件页拆分前</td></tr>
+<tr><td>hardware-evidence_...233733.html</td><td>7/15 23:37</td><td>硬件页备份</td></tr>
+<tr><td>jk-warning-DC8-V1~V7</td><td>7/15 14:30~21:35</td><td>DC8 全版本迭代</td></tr>
+</table>
+</div>
+
+<div class="links">
+  <strong>🔗 快捷入口：</strong>
+  <a href="https://heroic-cucurucho-1f69c1.netlify.app" target="_blank" style="font-size:1.1rem;font-weight:bold;">在线避雷页 →</a>
+  <a href="https://heroic-cucurucho-1f69c1.netlify.app/jk-warning/hardware-evidence.html" target="_blank">硬件对比页 →</a>
+  <span>Google Search Console ✅</span>
+  <span>Bing Webmaster ✅</span>
+</div>
+
+</body>
+</html>
