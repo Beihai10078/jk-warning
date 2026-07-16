@@ -152,6 +152,7 @@
   .cd-header {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     margin-bottom: 8px;
   }
@@ -925,6 +926,11 @@
     border-color: rgba(255,59,48,0.35);
     color: #fff;
   }
+  .toc-item.active {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: rgba(229,57,53,0.07);
+  }
   .toc-num {
     font-family: 'Courier New', monospace;
     font-size: 0.72rem;
@@ -995,7 +1001,7 @@
   .sidebar-toc .sidebar-label { font-size: 0.72rem; }
 
   /* ── 目录锚点偏移（防 sticky 顶栏遮挡） ── */
-  #problems, #evidence, #timeline, #considering, #sources, #msg-wall {
+  #safety, #problems, #evidence, #timeline, #considering, #sources, #msg-wall {
     scroll-margin-top: 80px;
   }
 
@@ -1008,14 +1014,16 @@
 
 <!-- ── 左侧浮动目录 ── -->
 <nav class="sidebar-toc" id="sidebarToc">
-  <a href="#" style="color:#4fc3f7;"><span class="sidebar-num" style="color:#4fc3f7;">零</span><span class="sidebar-label">宇宙安全声明</span></a>
+  <a href="#safety"><span class="sidebar-num">零</span><span class="sidebar-label">宇宙安全声明</span></a>
   <a href="#problems"><span class="sidebar-num">一</span><span class="sidebar-label">七大问题</span></a>
   <a href="#evidence"><span class="sidebar-num">二</span><span class="sidebar-label">实锤证据</span></a>
   <a href="#timeline"><span class="sidebar-num">三</span><span class="sidebar-label">时间线</span></a>
   <a href="#considering"><span class="sidebar-num">四</span><span class="sidebar-label">报考警告</span></a>
   <a href="#sources"><span class="sidebar-num">五</span><span class="sidebar-label">参考来源</span></a>
   <a href="#msg-wall"><span class="sidebar-num">六</span><span class="sidebar-label">留言墙</span></a>
-  <a href="hardware-evidence.html" target="_blank" style="color:#4fc3f7;"><span class="sidebar-num" style="color:#4fc3f7;">🖥️</span><span class="sidebar-label">硬件证据</span></a>
+  <a href="hardware-evidence.html" target="_blank"><span class="sidebar-num">七</span><span class="sidebar-label">硬件证据</span></a>
+  <a href="文件清单.html" target="_blank"><span class="sidebar-num">八</span><span class="sidebar-label">本地文件</span></a>
+  <a href="campus-photos.html" target="_blank"><span class="sidebar-num">九</span><span class="sidebar-label">校园实拍</span></a>
 </nav>
 
 <!-- ⚠️ 顶部避雷横幅 -->
@@ -1028,10 +1036,11 @@
 </div>
 
 <!-- ── 宇宙安全声明 ── -->
-<div class="cosmic-declaration">
+<div class="cosmic-declaration" id="safety">
   <div class="cd-header">
     <span class="cd-marker"></span>
     <span class="cd-title">宇宙安全声明 · COSMIC SAFETY DECLARATION</span>
+    <span class="cd-marker mirror"></span>
   </div>
   <div class="cd-body">
     <p>本文内容基于公开可查的政府文件（江苏省人社厅、南京市人社局、南京市民政局、人民法院公开记录）、第三方平台公开信息（黑猫投诉、水滴信用、百度百科、百度知道）以及在校生亲历者陈述整理。所有引用内容均附原始链接，可自行核验。</p>
@@ -1079,14 +1088,16 @@
   <nav class="toc">
     <div class="toc-title">目录速览 · TABLE OF CONTENTS</div>
     <div class="toc-grid">
-      <a href="#" class="toc-item"><span class="toc-num" style="color:#4fc3f7;">零</span> 宇宙安全声明</a>
+      <a href="#safety" class="toc-item"><span class="toc-num">零</span> 宇宙安全声明</a>
       <a href="#problems"    class="toc-item"><span class="toc-num">一</span> 七大核心问题</a>
       <a href="#evidence"    class="toc-item"><span class="toc-num">二</span> 实锤证据<span class="toc-ev-count">12 条</span></a>
       <a href="#timeline"    class="toc-item"><span class="toc-num">三</span> 时间线</a>
       <a href="#considering" class="toc-item"><span class="toc-num">四</span> 报考警告</a>
       <a href="#sources"     class="toc-item"><span class="toc-num">五</span> 参考来源</a>
       <a href="#msg-wall"    class="toc-item"><span class="toc-num">六</span> 匿名留言墙</a>
-      <a href="hardware-evidence.html" target="_blank" class="toc-item" style="border-color:rgba(79,195,247,0.3);"><span class="toc-num" style="color:#4fc3f7;">🖥️</span> 硬件配置对比证据</a>
+      <a href="hardware-evidence.html" target="_blank" class="toc-item"><span class="toc-num">七</span> 硬件配置对比证据</a>
+      <a href="文件清单.html" target="_blank" class="toc-item"><span class="toc-num">八</span> 本地文件清单</a>
+      <a href="campus-photos.html" target="_blank" class="toc-item"><span class="toc-num">九</span> 校园环境实拍</a>
     </div>
   </nav>
 
@@ -1639,21 +1650,65 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  /* ====== 左侧目录滚动监听 ====== */
+  /* ====== 左侧目录 & TOC 联动高亮 (IntersectionObserver) ====== */
   (function () {
-    const links = document.querySelectorAll('.sidebar-toc a');
-    const sections = [];
-    links.forEach(a => { const s = document.querySelector(a.getAttribute('href')); if (s) sections.push({el: s, link: a}); });
-    if (!sections.length) return;
-    const toc = document.getElementById('sidebarToc');
-    window.addEventListener('scroll', () => {
-      let active = sections[0];
-      for (let i = sections.length-1; i >= 0; i--) {
-        const rect = sections[i].el.getBoundingClientRect();
-        if (rect.top <= window.innerHeight * 0.4) { active = sections[i]; break; }
+    const sidebarLinks = document.querySelectorAll('.sidebar-toc a');
+    const tocLinks = document.querySelectorAll('.toc-item');
+
+    /* 构建 section → { sidebar, toc } 映射 */
+    const sectionMap = new Map();
+    sidebarLinks.forEach(a => {
+      const href = a.getAttribute('href');
+      if (href && href.startsWith('#') && href !== '#') {
+        const el = document.querySelector(href);
+        if (el) sectionMap.set(href, { el, sidebar: a, toc: null });
       }
-      sections.forEach(s => s.link.classList.remove('active'));
-      active.link.classList.add('active');
+    });
+    tocLinks.forEach(a => {
+      const href = a.getAttribute('href');
+      if (href && sectionMap.has(href)) {
+        sectionMap.get(href).toc = a;
+      }
+    });
+
+    function clearAll() {
+      sidebarLinks.forEach(a => a.classList.remove('active'));
+      tocLinks.forEach(a => a.classList.remove('active'));
+    }
+
+    function activate(href) {
+      clearAll();
+      const entry = sectionMap.get(href);
+      if (!entry) return;
+      if (entry.sidebar) entry.sidebar.classList.add('active');
+      if (entry.toc) entry.toc.classList.add('active');
+    }
+
+    /* IntersectionObserver — 滚动时自动高亮当前章节 */
+    const observer = new IntersectionObserver(entries => {
+      let best = null;
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          if (!best || e.intersectionRatio > best.intersectionRatio) best = e;
+        }
+      });
+      if (best) activate('#' + best.target.id);
+    }, { rootMargin: '-20% 0px -60% 0px', threshold: [0, 0.3, 0.6, 1] });
+
+    sectionMap.forEach(entry => observer.observe(entry.el));
+
+    /* 点击即时高亮（侧边栏 + TOC 同步） */
+    sidebarLinks.forEach(a => {
+      a.addEventListener('click', function () {
+        const href = this.getAttribute('href');
+        if (href && sectionMap.has(href)) activate(href);
+      });
+    });
+    tocLinks.forEach(a => {
+      a.addEventListener('click', function () {
+        const href = this.getAttribute('href');
+        if (href && sectionMap.has(href)) activate(href);
+      });
     });
   })();
 
