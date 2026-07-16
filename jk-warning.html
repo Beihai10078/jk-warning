@@ -2210,10 +2210,28 @@ function closeLightbox() {
   border-radius: 50%; width: 44px; height: 44px;
   font-size: 1.1rem; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  backdrop-filter: blur(8px); transition: all 0.2s;
+  backdrop-filter: blur(8px);
   color: var(--text-primary);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s, transform 0.2s;
 }
-#bgm-btn:hover { background: var(--surface-hover); transform: scale(1.1); }
+/* 扩大鼠标感应区域 */
+#bgm-btn::after {
+  content: '';
+  position: absolute;
+  inset: -24px;
+  pointer-events: auto;
+}
+#bgm-btn:hover {
+  opacity: 1;
+  pointer-events: auto;
+  background: var(--surface-hover);
+  transform: scale(1.1);
+}
+/* 手机端始终显示 */
+@media (pointer: coarse) {
+  #bgm-btn { opacity: 1; pointer-events: auto; }
+}
 </style>
 
 <script>
