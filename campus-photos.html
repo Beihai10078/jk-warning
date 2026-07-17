@@ -21,7 +21,101 @@
     line-height: 1.7; padding: 40px; max-width: 960px; margin: auto;
   }
   h1 { font-size: 1.5rem; margin-bottom: 4px; }
-  .subtitle { color: var(--text2); font-size: 0.85rem; margin-bottom: 32px; }
+  .subtitle { color: var(--text2); font-size: 0.85rem; margin-bottom: 24px; }
+
+  /* ===== 拍照上传区域 ===== */
+  .upload-section {
+    background: #fff; border-radius: var(--radius); padding: 24px;
+    margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    border-top: 3px solid var(--accent);
+  }
+  .upload-section h2 {
+    font-size: 1.05rem; color: #333; margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .upload-controls {
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 14px;
+  }
+  .cat-btn-group {
+    display: flex; gap: 6px; flex-wrap: wrap;
+  }
+  .cat-btn {
+    padding: 8px 16px; border: 2px solid #ddd; border-radius: 20px;
+    background: #fff; color: #666; font-size: 0.85rem; cursor: pointer;
+    transition: all 0.2s; white-space: nowrap;
+  }
+  .cat-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .cat-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .capture-btn {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 14px 32px; background: var(--accent); color: #fff;
+    border: none; border-radius: 28px; font-size: 1rem; font-weight: 600;
+    cursor: pointer; transition: all 0.2s; height: 56px; min-width: 180px;
+    box-shadow: 0 2px 8px rgba(229,57,53,0.3);
+  }
+  .capture-btn:hover { background: #c62828; box-shadow: 0 4px 14px rgba(229,57,53,0.4); transform: translateY(-1px); }
+  .capture-btn:active { transform: translateY(0); }
+  .capture-btn .icon { font-size: 1.4rem; }
+  #captureInput { display: none; }
+
+  /* 预览区域 */
+  .preview-area {
+    display: none; margin-top: 14px; padding: 16px;
+    background: #fafafa; border-radius: 8px; border: 1px solid var(--border);
+  }
+  .preview-area.show { display: block; }
+  .preview-row {
+    display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap;
+  }
+  .preview-row img {
+    width: 200px; height: auto; border-radius: 6px;
+    border: 1px solid var(--border); object-fit: cover; aspect-ratio: 4/3;
+  }
+  .preview-info {
+    flex: 1; min-width: 200px; display: flex; flex-direction: column; gap: 10px;
+  }
+  .preview-info label { font-size: 0.82rem; color: #666; font-weight: 500; }
+  .preview-info input[type="text"] {
+    width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 6px;
+    font-size: 0.9rem; outline: none; transition: border 0.2s;
+  }
+  .preview-info input[type="text"]:focus { border-color: var(--accent); }
+  .upload-submit {
+    align-self: flex-start; padding: 10px 28px;
+    background: #2e7d32; color: #fff; border: none; border-radius: 22px;
+    font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+  }
+  .upload-submit:hover { background: #1b5e20; }
+  .upload-submit:disabled { background: #aaa; cursor: not-allowed; }
+
+  /* 进度条 */
+  .progress-bar-wrap {
+    display: none; height: 4px; background: #eee; border-radius: 2px;
+    margin-top: 12px; overflow: hidden;
+  }
+  .progress-bar-wrap.show { display: block; }
+  .progress-bar {
+    height: 100%; width: 0; background: var(--accent); border-radius: 2px;
+    animation: progressAnim 2s ease-in-out forwards;
+  }
+  @keyframes progressAnim {
+    0% { width: 0; }
+    30% { width: 40%; }
+    70% { width: 75%; }
+    100% { width: 100%; }
+  }
+  .upload-msg {
+    display: none; margin-top: 10px; padding: 10px 14px;
+    border-radius: 6px; font-size: 0.84rem;
+  }
+  .upload-msg.success {
+    display: block; background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9;
+  }
+  .upload-msg.error {
+    display: block; background: #ffebee; color: #c62828; border: 1px solid #ffcdd2;
+  }
+
+  /* ===== 照片网格 ===== */
   .section {
     background: #fff; border-radius: var(--radius); padding: 20px 24px;
     margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06);
@@ -40,27 +134,108 @@
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 12px;
   }
-  .photo-placeholder {
-    aspect-ratio: 4/3;
-    background: #eee;
-    border: 2px dashed #ccc;
-    border-radius: 6px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #bbb;
-    font-size: 0.8rem;
-    gap: 6px;
-    transition: all 0.2s;
+  .photo-card {
+    position: relative; aspect-ratio: 4/3;
+    background: #eee; border: 2px dashed #ccc;
+    border-radius: 8px; overflow: hidden;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    color: #bbb; font-size: 0.8rem; gap: 6px;
+    transition: all 0.2s; cursor: default;
   }
-  .photo-placeholder:hover {
+  /* 可点击拍照的占位框 */
+  .photo-card.clickable {
+    cursor: pointer;
+  }
+  .photo-card.clickable:hover {
     border-color: var(--accent);
-    color: var(--accent);
-    background: rgba(229,57,53,0.03);
+    border-style: solid;
+    box-shadow: 0 2px 12px rgba(229,57,53,0.18);
+    transform: translateY(-2px);
   }
-  .photo-placeholder .icon { font-size: 1.6rem; }
-  .photo-placeholder .label { font-size: 0.75rem; text-align: center; padding: 0 8px; }
+  .photo-card.clickable:hover .camera-hint { opacity: 1; }
+  .photo-card .camera-hint {
+    display: flex; align-items: center; gap: 4px;
+    font-size: 0.68rem; color: var(--accent);
+    opacity: 0; transition: opacity 0.2s; margin-top: 2px;
+  }
+  .photo-card.has-photo {
+    border: 1px solid var(--border); cursor: pointer;
+  }
+  .photo-card.has-photo:hover {
+    border-color: var(--accent);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1); transform: translateY(-2px);
+  }
+  .photo-card .placeholder-content { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .photo-card .icon { font-size: 1.6rem; }
+  .photo-card .label { font-size: 0.75rem; text-align: center; padding: 0 8px; }
+  .photo-card img {
+    display: none; width: 100%; height: 100%; object-fit: cover;
+    position: absolute; inset: 0;
+  }
+  .photo-card.has-photo img { display: block; }
+  .photo-card.has-photo .placeholder-content { display: none; }
+
+  /* 占位框内拍照预览 */
+  .photo-card .capture-preview {
+    display: none; position: absolute; inset: 0;
+    background: #fff; flex-direction: column;
+    align-items: center; justify-content: center; gap: 8px; padding: 8px;
+  }
+  .photo-card.previewing .capture-preview { display: flex; }
+  .photo-card.previewing .placeholder-content { display: none; }
+  .photo-card .capture-preview img {
+    display: block; position: static; width: 100%; height: auto;
+    max-height: 70%; object-fit: cover; border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+  .photo-card .capture-preview .preview-actions {
+    display: flex; gap: 8px;
+  }
+  .photo-card .capture-preview .pv-btn {
+    padding: 6px 16px; border: none; border-radius: 18px;
+    font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+  }
+  .photo-card .capture-preview .pv-confirm { background: #2e7d32; color: #fff; }
+  .photo-card .capture-preview .pv-confirm:hover { background: #1b5e20; }
+  .photo-card .capture-preview .pv-confirm:disabled { background: #aaa; cursor: not-allowed; }
+  .photo-card .capture-preview .pv-cancel { background: #eee; color: #666; }
+  .photo-card .capture-preview .pv-cancel:hover { background: #ddd; }
+  .photo-card .capture-preview .pv-msg {
+    font-size: 0.72rem; min-height: 1em;
+  }
+  .photo-card .capture-preview .pv-msg.ok { color: #2e7d32; }
+  .photo-card .capture-preview .pv-msg.err { color: #c62828; }
+  .photo-card .category-tag {
+    display: none; position: absolute; bottom: 6px; left: 6px;
+    background: rgba(0,0,0,0.6); color: #fff; font-size: 0.7rem;
+    padding: 2px 8px; border-radius: 10px; z-index: 2;
+  }
+  .photo-card.has-photo .category-tag { display: block; }
+  .photo-card .uploaded-dot {
+    display: none; position: absolute; top: 6px; right: 6px;
+    width: 10px; height: 10px; background: #4caf50; border-radius: 50%;
+    border: 2px solid #fff; z-index: 2;
+  }
+  .photo-card.uploaded .uploaded-dot { display: block; }
+
+  /* 灯箱 */
+  .lightbox-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+    z-index: 9999; justify-content: center; align-items: center; cursor: pointer;
+  }
+  .lightbox-overlay.show { display: flex; }
+  .lightbox-overlay img {
+    max-width: 90vw; max-height: 90vh; border-radius: 6px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+  }
+  .lightbox-close {
+    position: absolute; top: 20px; right: 30px;
+    color: #fff; font-size: 2rem; cursor: pointer; z-index: 10000;
+    width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.1); border-radius: 50%; transition: background 0.2s;
+  }
+  .lightbox-close:hover { background: rgba(255,255,255,0.25); }
 
   .back-link {
     display: inline-block; margin-top: 40px;
@@ -68,6 +243,22 @@
     padding: 6px 0; border-bottom: 1px solid transparent; transition: all 0.2s;
   }
   .back-link:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ===== 移动端适配 ===== */
+  @media (max-width: 768px) {
+    body { padding: 16px; }
+    .photo-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .photo-card .icon { font-size: 1.3rem; }
+    .photo-card .label { font-size: 0.7rem; }
+    .section { padding: 14px 12px; }
+    .upload-section { padding: 16px 12px; }
+    .capture-btn { width: 100%; min-width: unset; height: 56px; font-size: 1.05rem; }
+    .cat-btn { padding: 6px 12px; font-size: 0.8rem; }
+    .preview-row img { width: 100%; }
+    .upload-controls { flex-direction: column; align-items: stretch; }
+    .cat-btn-group { justify-content: center; }
+    .lightbox-close { top: 10px; right: 12px; font-size: 1.5rem; }
+  }
 </style>
 </head>
 <body>
@@ -75,73 +266,451 @@
 <h1>校园实拍</h1>
 <p class="subtitle">南京建康高级技工学校 · 宿舍 / 教学楼 / 公共区域环境实录</p>
 
+<!-- ===== 手动上传区域（默认折叠） ===== -->
+<div class="upload-section" id="uploadSection" style="display:none;">
+  <h2>📷 手动上传</h2>
+  <div class="upload-controls">
+    <div class="cat-btn-group" id="catGroup">
+      <button class="cat-btn active" data-cat="dorm">宿舍环境</button>
+      <button class="cat-btn" data-cat="classroom">教学楼</button>
+      <button class="cat-btn" data-cat="public">公共区域</button>
+    </div>
+    <button class="capture-btn" id="captureBtn" onclick="manualCapture()">
+      <span class="icon">📷</span> 拍照上传
+    </button>
+  </div>
+
+  <div class="preview-area" id="previewArea">
+    <div class="preview-row">
+      <img id="previewImg" src="" alt="预览">
+      <div class="preview-info">
+        <label for="photoLabel">照片标签（简短描述）</label>
+        <input type="text" id="photoLabel" placeholder="如：宿舍楼外观" maxlength="40">
+        <button class="upload-submit" id="uploadBtn" onclick="manualUpload()">确认上传</button>
+        <button style="align-self:flex-start;padding:8px 18px;background:#eee;border:none;border-radius:20px;font-size:0.82rem;cursor:pointer;margin-top:-4px;" onclick="cancelManualPreview()">取消</button>
+      </div>
+    </div>
+    <div class="progress-bar-wrap" id="progressWrap">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="upload-msg" id="uploadMsg"></div>
+  </div>
+</div>
+
+<!-- 手动上传折叠开关 -->
+<button id="manualUploadToggle" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:#fff;border:1px solid #ddd;border-radius:20px;font-size:0.82rem;color:#666;cursor:pointer;margin-bottom:20px;transition:all 0.2s;" onclick="toggleManualUpload()">
+  📷 手动上传
+</button>
+
+<!-- 共用的隐藏拍照输入 -->
+<input type="file" id="captureInput" accept="image/*" capture="environment" style="display:none" onchange="handleCapture(event)">
+
+<!-- ===== 宿舍环境 ===== -->
 <div class="section">
   <h2><span class="num">一</span> 宿舍环境</h2>
   <p style="color:var(--text2);font-size:0.82rem;margin-bottom:14px;">宿舍楼外观、内部设施、床铺、卫生间、空调/热水等配套。</p>
-  <div class="photo-grid">
-    <div class="photo-placeholder"><span class="icon">🏢</span><span class="label">宿舍楼外观</span></div>
-    <div class="photo-placeholder"><span class="icon">🛏️</span><span class="label">宿舍内部全景</span></div>
-    <div class="photo-placeholder"><span class="icon">🛏️</span><span class="label">床位特写</span></div>
-    <div class="photo-placeholder"><span class="icon">🚽</span><span class="label">卫生间</span></div>
-    <div class="photo-placeholder"><span class="icon">🚿</span><span class="label">浴室/淋浴</span></div>
-    <div class="photo-placeholder"><span class="icon">❄️</span><span class="label">空调/热水器</span></div>
-    <div class="photo-placeholder"><span class="icon">🔌</span><span class="label">插座/用电情况</span></div>
+  <div class="photo-grid" id="dormGrid">
+    <div class="photo-card" data-photo="photos/dorm/exterior.jpg" data-cat="dorm" data-label="宿舍楼外观">
+      <div class="placeholder-content"><span class="icon">🏢</span><span class="label">宿舍楼外观</span></div>
+    </div>
+    <div class="photo-card" data-photo="photos/dorm/interior.jpg" data-cat="dorm" data-label="宿舍内部全景">
+      <div class="placeholder-content"><span class="icon">🛏️</span><span class="label">宿舍内部全景</span></div>
+    </div>
+    <div class="photo-card" data-photo="photos/dorm/bed.jpg" data-cat="dorm" data-label="床位特写">
+      <div class="placeholder-content"><span class="icon">🛏️</span><span class="label">床位特写</span></div>
+    </div>
+    <div class="photo-card" data-photo="photos/dorm/toilet.jpg" data-cat="dorm" data-label="卫生间">
+      <div class="placeholder-content"><span class="icon">🚽</span><span class="label">卫生间</span></div>
+    </div>
+    <div class="photo-card" data-photo="photos/dorm/shower.jpg" data-cat="dorm" data-label="浴室/淋浴">
+      <div class="placeholder-content"><span class="icon">🚿</span><span class="label">浴室/淋浴</span></div>
+    </div>
+    <div class="photo-card" data-photo="photos/dorm/ac_heater.jpg" data-cat="dorm" data-label="空调/热水器">
+      <div class="placeholder-content"><span class="icon">❄️</span><span class="label">空调/热水器</span></div>
+    </div>
+    <div class="photo-card" data-photo="photos/dorm/outlet.jpg" data-cat="dorm" data-label="插座/用电情况">
+      <div class="placeholder-content"><span class="icon">🔌</span><span class="label">插座/用电情况</span></div>
+    </div>
   </div>
   <p style="font-size:0.78rem;color:#c62828;margin-top:10px;padding:8px 12px;background:rgba(229,57,53,0.06);border-radius:6px;">
     📝 后续将从小红书收集学校官方宣传照，与实拍图做 <strong>官宣 vs 实住</strong> 对比。
   </p>
-
   <h3 style="font-size:0.95rem;color:#333;margin:18px 0 8px;padding-left:4px;border-left:3px solid var(--accent);">
     ⚠️ 面子工程：一楼 vs 其他楼层
   </h3>
   <p style="color:var(--text2);font-size:0.82rem;margin-bottom:14px;">
     2026年6月期末考后，学校仅装修一楼（领导视察路线），二楼及以上一切照旧。一楼学生被迫并入二楼挤占空间。
   </p>
-  <div class="photo-grid">
-    <div class="photo-placeholder"><span class="icon">✨</span><span class="label">一楼样板间</span></div>
-    <div class="photo-placeholder"><span class="icon">📸</span><span class="label">二楼及以上实况</span></div>
-    <div class="photo-placeholder"><span class="icon">📏</span><span class="label">空间对比（挤占后）</span></div>
-    <div class="photo-placeholder"><span class="icon">🚪</span><span class="label">楼层楼道对比</span></div>
+  <div class="photo-grid" id="dormFloorGrid">
+    <div class="photo-card" data-photo="photos/dorm/floor1_model.jpg" data-cat="dorm" data-label="一楼样板间">
+      <div class="placeholder-content"><span class="icon">✨</span><span class="label">一楼样板间</span></div>
+    </div>
+    <div class="photo-card" data-photo="photos/dorm/floor2_real.jpg" data-cat="dorm" data-label="二楼及以上实况">
+      <div class="placeholder-content"><span class="icon">📸</span><span class="label">二楼及以上实况</span></div>
+    </div>
+    <div class="photo-card" data-photo="photos/dorm/space_compare.jpg" data-cat="dorm" data-label="空间对比（挤占后）">
+      <div class="placeholder-content"><span class="icon">📏</span><span class="label">空间对比（挤占后）</span></div>
+    </div>
+    <div class="photo-card" data-photo="photos/dorm/hallway_compare.jpg" data-cat="dorm" data-label="楼层楼道对比">
+      <div class="placeholder-content"><span class="icon">🚪</span><span class="label">楼层楼道对比</span></div>
+    </div>
   </div>
 </div>
 
+<!-- ===== 教学楼 ===== -->
 <div class="section">
   <h2><span class="num">二</span> 教学楼</h2>
   <p style="color:var(--text2);font-size:0.82rem;margin-bottom:14px;">教室、走廊、厕所、实训室、多媒体设备等实际教学硬件。</p>
-  <div class="photo-grid">
-    <div class="photo-placeholder"><span class="icon">🏫</span><span class="label">教学楼外观</span></div>
-    <div class="photo-placeholder"><span class="icon">🚪</span><span class="label">教室全貌</span></div>
-    <div class="photo-placeholder"><span class="icon">🪑</span><span class="label">课桌椅特写</span></div>
-    <div class="photo-placeholder"><span class="icon">🖥️</span><span class="label">多媒体设备</span></div>
-    <div class="photo-placeholder"><span class="icon">🚻</span><span class="label">走廊/厕所</span></div>
-    <div class="photo-placeholder"><span class="icon">🔬</span><span class="label">实训室</span></div>
+  <div class="photo-grid" id="classroomGrid">
+    <div class="photo-card" data-photo="photos/classroom/building.jpg" data-cat="classroom" data-label="教学楼外观">
+      <div class="placeholder-content"><span class="icon">🏫</span><span class="label">教学楼外观</span></div>
+    </div>
+    <div class="photo-card" data-photo="photos/classroom/room.jpg" data-cat="classroom" data-label="教室全貌">
+      <div class="placeholder-content"><span class="icon">🚪</span><span class="label">教室全貌</span></div>
+    </div>
+    <div class="photo-card" data-photo="photos/classroom/desk.jpg" data-cat="classroom" data-label="课桌椅特写">
+      <div class="placeholder-content"><span class="icon">🪑</span><span class="label">课桌椅特写</span></div>
+    </div>
+    <div class="photo-card" data-photo="photos/classroom/multimedia.jpg" data-cat="classroom" data-label="多媒体设备">
+      <div class="placeholder-content"><span class="icon">🖥️</span><span class="label">多媒体设备</span></div>
+    </div>
+    <div class="photo-card" data-photo="photos/classroom/hallway.jpg" data-cat="classroom" data-label="走廊/厕所">
+      <div class="placeholder-content"><span class="icon">🚻</span><span class="label">走廊/厕所</span></div>
+    </div>
+    <div class="photo-card" data-photo="photos/classroom/lab.jpg" data-cat="classroom" data-label="实训室">
+      <div class="placeholder-content"><span class="icon">🔬</span><span class="label">实训室</span></div>
+    </div>
   </div>
 </div>
 
+<!-- ===== 公共区域 ===== -->
 <div class="section">
   <h2><span class="num">三</span> 公共区域</h2>
   <p style="color:var(--text2);font-size:0.82rem;margin-bottom:14px;">食堂、操场、图书馆、校园道路、围墙等公共设施。</p>
-  <div class="photo-grid">
-    <div class="photo-placeholder"><span class="icon">🍽️</span><span class="label">食堂</span></div>
-    <div class="photo-placeholder"><span class="icon">⚽</span><span class="label">操场/运动场</span></div>
-    <div class="photo-placeholder"><span class="icon">📚</span><span class="label">图书馆</span></div>
-    <div class="photo-placeholder"><span class="icon">🛣️</span><span class="label">校园道路</span></div>
-    <div class="photo-placeholder"><span class="icon">🧱</span><span class="label">围墙/校门</span></div>
-    <div class="photo-placeholder"><span class="icon">🅿️</span><span class="label">其他设施</span></div>
+  <div class="photo-grid" id="publicGrid">
+    <div class="photo-card" data-photo="photos/public/cafeteria.jpg" data-cat="public" data-label="食堂">
+      <div class="placeholder-content"><span class="icon">🍽️</span><span class="label">食堂</span></div>
+    </div>
+    <div class="photo-card" data-photo="photos/public/playground.jpg" data-cat="public" data-label="操场/运动场">
+      <div class="placeholder-content"><span class="icon">⚽</span><span class="label">操场/运动场</span></div>
+    </div>
+    <div class="photo-card" data-photo="photos/public/library.jpg" data-cat="public" data-label="图书馆">
+      <div class="placeholder-content"><span class="icon">📚</span><span class="label">图书馆</span></div>
+    </div>
+    <div class="photo-card" data-photo="photos/public/road.jpg" data-cat="public" data-label="校园道路">
+      <div class="placeholder-content"><span class="icon">🛣️</span><span class="label">校园道路</span></div>
+    </div>
+    <div class="photo-card" data-photo="photos/public/gate.jpg" data-cat="public" data-label="围墙/校门">
+      <div class="placeholder-content"><span class="icon">🧱</span><span class="label">围墙/校门</span></div>
+    </div>
+    <div class="photo-card" data-photo="photos/public/other.jpg" data-cat="public" data-label="其他设施">
+      <div class="placeholder-content"><span class="icon">🅿️</span><span class="label">其他设施</span></div>
+    </div>
   </div>
   <p style="font-size:0.78rem;color:#c62828;margin-top:10px;padding:8px 12px;background:rgba(229,57,53,0.06);border-radius:6px;">
     📝 操场极小，升旗仪式需分两批：两个年级一轮，第三年级补上。
   </p>
 </div>
 
+<!-- ===== 底部说明 ===== -->
 <div class="section" style="border-left: 3px solid var(--accent);">
   <p style="font-size:0.82rem;color:var(--text2);">
-    ⚠️ 本页面目前为骨架占位，照片将在 2026 年秋季学期开学后实地拍摄补充。<br>
+    ⚠️ 本页照片将在 2026 年秋季学期开学后实地拍摄补充。<br>
     所有照片需保留原始 EXIF 信息（时间/设备/GPS），作为真实环境证据。
   </p>
 </div>
 
 <a class="back-link" href="index.html">← 返回避雷页</a>
+
+<!-- ===== 灯箱 ===== -->
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">&times;</span>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<script>
+// ===== 全局状态 =====
+var pendingCard = null;          // 当前正在处理的占位框 DOM
+var pendingBase64 = null;       // 当前拍照的 base64
+var pendingCategory = null;     // 拍照时从占位框提取的 category
+var pendingLabel = null;        // 拍照时从占位框提取的 label
+
+// ===== 手动上传区域折叠开关 =====
+function toggleManualUpload() {
+  var sec = document.getElementById('uploadSection');
+  sec.style.display = (sec.style.display === 'none') ? 'block' : 'none';
+}
+
+function manualCapture() {
+  pendingCard = null;  // 标记为手动模式
+  document.getElementById('captureInput').click();
+}
+
+// ===== 占位框点击拍照 =====
+function onPlaceholderClick(card) {
+  pendingCard = card;
+  pendingCategory = card.getAttribute('data-cat') || 'dorm';
+  pendingLabel = card.getAttribute('data-label') || '未命名';
+  document.getElementById('captureInput').click();
+}
+
+// ===== 拍照捕获（统一入口） =====
+function handleCapture(e) {
+  var file = e.target.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    var b64 = ev.target.result;
+
+    if (pendingCard) {
+      // 占位框拍照模式：在占位框内预览
+      showCardPreview(pendingCard, b64);
+    } else {
+      // 手动上传模式：在顶部区域预览
+      capturedBase64 = b64;
+      document.getElementById('previewImg').src = b64;
+      document.getElementById('previewArea').classList.add('show');
+      document.getElementById('photoLabel').value = '';
+      document.getElementById('uploadMsg').className = 'upload-msg';
+      document.getElementById('uploadMsg').textContent = '';
+      document.getElementById('progressWrap').classList.remove('show');
+      document.getElementById('progressBar').style.animation = 'none';
+    }
+  };
+  reader.readAsDataURL(file);
+  e.target.value = '';
+}
+
+// ===== 占位框内显示预览 =====
+function showCardPreview(card, b64) {
+  // 创建预览结构（如果还没有）
+  var preview = card.querySelector('.capture-preview');
+  if (!preview) {
+    preview = document.createElement('div');
+    preview.className = 'capture-preview';
+    preview.innerHTML =
+      '<img src="" alt="预览">' +
+      '<div class="preview-actions">' +
+        '<button class="pv-btn pv-confirm">确认上传</button>' +
+        '<button class="pv-btn pv-cancel">取消</button>' +
+      '</div>' +
+      '<div class="pv-msg"></div>';
+    card.appendChild(preview);
+
+    // 确认按钮
+    preview.querySelector('.pv-confirm').addEventListener('click', function(e) {
+      e.stopPropagation();
+      uploadFromCard(card);
+    });
+    // 取消按钮
+    preview.querySelector('.pv-cancel').addEventListener('click', function(e) {
+      e.stopPropagation();
+      cancelCardPreview(card);
+    });
+  }
+
+  preview.querySelector('img').src = b64;
+  preview.querySelector('.pv-msg').textContent = '';
+  preview.querySelector('.pv-msg').className = 'pv-msg';
+  card.classList.add('previewing');
+  pendingBase64 = b64;
+}
+
+function cancelCardPreview(card) {
+  card.classList.remove('previewing');
+  pendingBase64 = null;
+}
+
+// ===== 从占位框上传 =====
+function uploadFromCard(card) {
+  if (!pendingBase64) return;
+  var cat = card.getAttribute('data-cat') || 'dorm';
+  var label = card.getAttribute('data-label') || '未命名';
+  var preview = card.querySelector('.capture-preview');
+  var confirmBtn = preview.querySelector('.pv-confirm');
+  var cancelBtn = preview.querySelector('.pv-cancel');
+  var msgEl = preview.querySelector('.pv-msg');
+
+  confirmBtn.disabled = true;
+  confirmBtn.textContent = '上传中...';
+
+  fetch('/api/upload-photo', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      image: pendingBase64,
+      category: cat,
+      label: label
+    })
+  })
+  .then(function(res) {
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return res.json();
+  })
+  .then(function(data) {
+    // 上传成功 → 转为真实图片
+    card.classList.remove('previewing', 'clickable');
+    card.classList.add('has-photo', 'uploaded');
+    // 移除预览结构
+    if (preview) preview.remove();
+    // 创建/替换 img
+    var existingImg = card.querySelector('img:not(.capture-preview img)');
+    if (!existingImg) {
+      existingImg = document.createElement('img');
+      card.insertBefore(existingImg, card.firstChild);
+    }
+    existingImg.src = pendingBase64;
+    existingImg.alt = label;
+    existingImg.style.display = 'block';
+
+    // 移除点击拍照事件，改为灯箱
+    card.onclick = function(e) { e.stopPropagation(); openLightbox(pendingBase64); };
+
+    // 添加已上传标记
+    if (!card.querySelector('.category-tag')) {
+      var tag = document.createElement('span');
+      tag.className = 'category-tag';
+      tag.textContent = label;
+      card.appendChild(tag);
+    }
+    if (!card.querySelector('.uploaded-dot')) {
+      var dot = document.createElement('span');
+      dot.className = 'uploaded-dot';
+      card.appendChild(dot);
+    }
+
+    pendingBase64 = null;
+  })
+  .catch(function(err) {
+    msgEl.className = 'pv-msg err';
+    msgEl.textContent = '上传失败：' + err.message;
+    confirmBtn.disabled = false;
+    confirmBtn.textContent = '确认上传';
+  });
+}
+
+// ===== 手动上传模式 =====
+var capturedBase64 = null;
+
+function cancelManualPreview() {
+  document.getElementById('previewArea').classList.remove('show');
+  capturedBase64 = null;
+}
+
+function manualUpload() {
+  if (!capturedBase64) return;
+
+  var activeCat = document.querySelector('#catGroup .cat-btn.active');
+  var category = activeCat ? activeCat.dataset.cat : 'dorm';
+  var label = document.getElementById('photoLabel').value.trim() || '未命名';
+
+  var btn = document.getElementById('uploadBtn');
+  btn.disabled = true;
+  btn.textContent = '上传中...';
+
+  var pw = document.getElementById('progressWrap');
+  var pb = document.getElementById('progressBar');
+  var msg = document.getElementById('uploadMsg');
+
+  pw.classList.add('show');
+  pb.style.animation = 'none';
+  void pb.offsetWidth;
+  pb.style.animation = 'progressAnim 2s ease-in-out forwards';
+  msg.className = 'upload-msg';
+  msg.textContent = '';
+
+  fetch('/api/upload-photo', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      image: capturedBase64,
+      category: category,
+      label: label
+    })
+  })
+  .then(function(res) {
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return res.json();
+  })
+  .then(function(data) {
+    msg.className = 'upload-msg success';
+    msg.textContent = '已上传成功';
+    btn.textContent = '确认上传';
+  })
+  .catch(function(err) {
+    msg.className = 'upload-msg error';
+    msg.textContent = '上传失败：' + err.message;
+    btn.disabled = false;
+    btn.textContent = '确认上传';
+    pw.classList.remove('show');
+  });
+}
+
+// ===== 分类按钮 =====
+document.querySelectorAll('#catGroup .cat-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('#catGroup .cat-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+  });
+});
+
+// ===== 灯箱 =====
+function openLightbox(src) {
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightbox').classList.add('show');
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('show');
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeLightbox();
+});
+
+// ===== 初始化 =====
+(function init() {
+  document.querySelectorAll('.photo-card[data-photo]').forEach(function(card) {
+    var photoPath = card.getAttribute('data-photo');
+    if (!photoPath) return;
+
+    // 尝试加载已有图片
+    var img = document.createElement('img');
+    img.src = photoPath;
+    img.alt = card.getAttribute('data-label') || '';
+    img.onload = function() {
+      card.classList.add('has-photo');
+      card.addEventListener('click', function(e) {
+        e.stopPropagation();
+        openLightbox(photoPath);
+      });
+    };
+    img.onerror = function() {
+      // 图片不存在 → 激活占位框可点击拍照
+      card.classList.add('clickable');
+      // 追加相机提示
+      var ph = card.querySelector('.placeholder-content');
+      if (ph && !ph.querySelector('.camera-hint')) {
+        var hint = document.createElement('span');
+        hint.className = 'camera-hint';
+        hint.innerHTML = '📷 点击拍照';
+        ph.appendChild(hint);
+      }
+      card.addEventListener('click', function(e) {
+        e.stopPropagation();
+        onPlaceholderClick(card);
+      });
+    };
+
+    var tag = document.createElement('span');
+    tag.className = 'category-tag';
+    tag.textContent = card.getAttribute('data-label') || '';
+
+    card.appendChild(img);
+    card.appendChild(tag);
+  });
+})();
+</script>
 
 </body>
 </html>

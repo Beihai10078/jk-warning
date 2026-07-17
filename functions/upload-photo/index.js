@@ -1,0 +1,82 @@
+// Netlify Function: 接收照片上传 → 提交到 GitHub 仓库 photos/ 目录
+const crypto = require('crypto');
+
+exports.handler = async (event) => {
+  if (event.httpMethod !== 'POST') {
+    return { statusCode: 405, body: 'Method Not Allowed' };
+  }
+
+  const TOKEN = process.env.GH_TOKEN;
+  const REPO = process.env.GH_REPO || 'Beihai10078/jk-warning';
+  const BRANCH = process.env.GH_BRANCH || 'main';
+
+  if (!TOKEN) {
+    return { statusCode: 500, body: JSON.stringify({ error: 'GH_TOKEN 未配置' }) };
+  }
+
+  try {
+    const body = JSON.parse(event.body);
+    const { image, category, label } = body;
+
+    if (!image || !category) {
+      return { statusCode: 400, body: JSON.stringify({ error: '缺少 image 或 category' }) };
+    }
+
+    // 生成文件名
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+    const safeLabel = (label || 'photo').replace(/[^a-zA-Z0-9\u4e00-\u9fff_-]/g, '_').slice(0, 30);
+    const filename = `${timestamp}_${safeLabel}.jpg`;
+    const path = `photos/${category}/${filename}`;
+
+    // base64 → buffer
+    const content = Buffer.from(image.replace(/^data:image\/\w+;base64,/, ''), 'base64');
+
+    // 获取文件 SHA（如果已存在则更新）
+    let sha = null;
+    try {
+      const checkRes = await fetch(
+        `https://api.github.com/repos/${REPO}/contents/${path}?ref=${BRANCH}`,
+        { headers: { Authorization: `Bearer ${TOKEN}`, 'User-Agent': 'netlify-function' } }
+      );
+      if (checkRes.ok) {
+        const data = await checkRes.json();
+        sha = data.sha;
+      }
+    } catch (_) {}
+
+    // 提交到 GitHub
+    const commitRes = await fetch(
+      `https://api.github.com/repos/${REPO}/contents/${path}`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+          'Content-Type': 'application/json',
+          'User-Agent': 'netlify-function',
+        },
+        body: JSON.stringify({
+          message: `📷 上传实拍照片: ${category}/${filename}`,
+          content: content.toString('base64'),
+          branch: BRANCH,
+          ...(sha ? { sha } : {}),
+        }),
+      }
+    );
+
+    if (!commitRes.ok) {
+      const errData = await commitRes.json();
+      return { statusCode: commitRes.status, body: JSON.stringify({ error: '提交失败', detail: errData }) };
+    }
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        success: true,
+        path,
+        url: `https://raw.githubusercontent.com/${REPO}/${BRANCH}/${path}`,
+      }),
+    };
+  } catch (e) {
+    return { statusCode: 500, body: JSON.stringify({ error: e.message }) };
+  }
+};
