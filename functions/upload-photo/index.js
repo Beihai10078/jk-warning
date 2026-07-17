@@ -1,6 +1,4 @@
 // Netlify Function: 接收照片上传 → 提交到 GitHub 仓库 photos/ 目录
-const crypto = require('crypto');
-
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
@@ -11,15 +9,32 @@ exports.handler = async (event) => {
   const BRANCH = process.env.GH_BRANCH || 'main';
 
   if (!TOKEN) {
-    return { statusCode: 500, body: JSON.stringify({ error: 'GH_TOKEN 未配置' }) };
+    return {
+      statusCode: 500,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ error: 'GH_TOKEN 环境变量未配置，请在 Netlify Dashboard → Site settings → Environment variables 中添加 GH_TOKEN' }),
+    };
   }
 
   try {
-    const body = JSON.parse(event.body);
+    let body;
+    try {
+      body = JSON.parse(event.body);
+    } catch (parseErr) {
+      return {
+        statusCode: 400,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ error: '请求体 JSON 解析失败', detail: parseErr.message, raw: String(event.body).slice(0, 200) }),
+      };
+    }
+
     const { image, category, label } = body;
 
-    if (!image || !category) {
-      return { statusCode: 400, body: JSON.stringify({ error: '缺少 image 或 category' }) };
+    if (!image) {
+      return { statusCode: 400, body: JSON.stringify({ error: '缺少 image 字段' }) };
+    }
+    if (!category) {
+      return { statusCode: 400, body: JSON.stringify({ error: '缺少 category 字段' }) };
     }
 
     // 生成文件名
@@ -29,13 +44,14 @@ exports.handler = async (event) => {
     const path = `photos/${category}/${filename}`;
 
     // base64 → buffer
-    const content = Buffer.from(image.replace(/^data:image\/\w+;base64,/, ''), 'base64');
+    const base64Data = image.replace(/^data:image\/\w+;base64,/, '');
+    const content = Buffer.from(base64Data, 'base64');
 
     // 获取文件 SHA（如果已存在则更新）
     let sha = null;
     try {
       const checkRes = await fetch(
-        `https://api.github.com/repos/${REPO}/contents/${path}?ref=${BRANCH}`,
+        `https://api.github.com/repos/${REPO}/contents/${encodeURIComponent(path)}?ref=${BRANCH}`,
         { headers: { Authorization: `Bearer ${TOKEN}`, 'User-Agent': 'netlify-function' } }
       );
       if (checkRes.ok) {
@@ -46,7 +62,7 @@ exports.handler = async (event) => {
 
     // 提交到 GitHub
     const commitRes = await fetch(
-      `https://api.github.com/repos/${REPO}/contents/${path}`,
+      `https://api.github.com/repos/${REPO}/contents/${encodeURIComponent(path)}`,
       {
         method: 'PUT',
         headers: {
@@ -55,7 +71,7 @@ exports.handler = async (event) => {
           'User-Agent': 'netlify-function',
         },
         body: JSON.stringify({
-          message: `📷 上传实拍照片: ${category}/${filename}`,
+          message: `${category}/${filename}`,
           content: content.toString('base64'),
           branch: BRANCH,
           ...(sha ? { sha } : {}),
@@ -64,12 +80,18 @@ exports.handler = async (event) => {
     );
 
     if (!commitRes.ok) {
-      const errData = await commitRes.json();
-      return { statusCode: commitRes.status, body: JSON.stringify({ error: '提交失败', detail: errData }) };
+      let errMsg = '';
+      try { const d = await commitRes.json(); errMsg = JSON.stringify(d).slice(0, 500); } catch (_) {}
+      return {
+        statusCode: 502,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ error: `GitHub API 提交失败 (HTTP ${commitRes.status})`, detail: errMsg }),
+      };
     }
 
     return {
       statusCode: 200,
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         success: true,
         path,
@@ -77,6 +99,10 @@ exports.handler = async (event) => {
       }),
     };
   } catch (e) {
-    return { statusCode: 500, body: JSON.stringify({ error: e.message }) };
+    return {
+      statusCode: 500,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ error: '函数内部异常', message: e.message, stack: String(e.stack).slice(0, 500) }),
+    };
   }
 };
